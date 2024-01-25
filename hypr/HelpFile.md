@@ -1,9 +1,3 @@
-# Welcome to my Hyprland help, and tips and tricks #
-# If you have questions, or need help you can open issue on my github
-# Or you can reach me in or join on Discord that I admin
-# Discord link https://discord.gg/V2SJ92vbEN  
-# Github page: https://github.com/JaKooLit
-
   Super = Windows Key
 
 # common operations
