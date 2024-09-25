@@ -5,6 +5,21 @@ Komorebic(cmd) {
     RunWait(format("komorebic.exe {}", cmd), , "Hide")
 }
 
+; Run Application
+#Enter::
+{
+    Run "C:\Program Files\WezTerm\wezterm-gui.exe"
+    WinWait "ahk_exe wezterm-gui.exe"
+    WinActivate "ahk_exe wezterm-gui.exe"
+}
+#e::
+{
+    Run "explorer"
+    WinWait "ahk_exe explorer.exe"
+    WinActivate "ahk_exe explorer.exe"
+}
+
+; Close, minimize windows
 #q::Komorebic("close")
 #m::Komorebic("minimize")
 
