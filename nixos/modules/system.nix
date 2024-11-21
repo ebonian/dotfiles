@@ -66,18 +66,8 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
-  environment.systemPackages = [(
-    pkgs.catppuccin-sddm.override {
-      flavor = "mocha";
-      font = "Noto Sans";
-      fontSize = "9";
-    }
-  )];
-
   services.displayManager.sddm = {
     enable = true;
-
-    theme = "catppuccin-mocha";
   };
 
   services.xserver.enable = true;
