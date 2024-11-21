@@ -1,6 +1,12 @@
 { config, pkgs, inputs, ... }:
 
 {
+  imports = [
+    ./modules/zoxide.nix
+
+    ./home/hyprland
+  ];
+
   home.username = "ebonian";
   home.homeDirectory = "/home/ebonian";
 
