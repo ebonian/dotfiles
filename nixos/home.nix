@@ -36,9 +36,12 @@
     userEmail = "tanadon.santisan@gmail.com";
     extraConfig = {
       init.defaultBranch = "main";
-      credential.helper = "${
-          pkgs.git.override { withLibsecret = true; }
-        }/bin/git-credential-libsecret";
+      url = {
+        "ssh://git@github.com" = {
+          insteadOf = "https://github.com";
+        };
+      };
+      user.signingkey = "7BA86B0DCD536EE0";
     };
     ignores = [
       ".direnv"
