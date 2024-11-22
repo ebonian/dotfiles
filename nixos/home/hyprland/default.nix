@@ -15,6 +15,11 @@
     recursive = true;
   };
 
+  home.file.".config/hypr/scripts" = {
+    source = ./scripts;
+    recursive = true;
+  };
+
   home.pointerCursor = {
     gtk.enable = true;
     package = pkgs.bibata-cursors;
