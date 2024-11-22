@@ -1,6 +1,10 @@
-{ inputs, pkgs, nixpkgs-unstable, lib, ... }:
-
 {
+  inputs,
+  pkgs,
+  nixpkgs-unstable,
+  lib,
+  ...
+}: {
   home.file.".config/hypr/hyprland.conf" = {
     source = ./hyprland.conf;
     recursive = true;

@@ -1,5 +1,3 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   programs.zoxide.enable = true;
 }

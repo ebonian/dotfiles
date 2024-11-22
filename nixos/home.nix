@@ -1,6 +1,9 @@
-{ config, pkgs, inputs, ... }:
-
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./modules/zoxide.nix
 
@@ -10,11 +13,9 @@
   home.username = "ebonian";
   home.homeDirectory = "/home/ebonian";
 
-  home.packages = with pkgs;
-  let
+  home.packages = with pkgs; let
     unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
-  in
-  [
+  in [
     zip
     unzip
     fastfetch
@@ -26,14 +27,14 @@
     kitty
 
     vscodium-fhs
-    
+
     wofi
   ];
 
   programs.git = {
     enable = true;
     userName = "ebonian";
-    userEmail = "tanadon.santisan@gmail.com";
+    userEmail = "52095091+ebonian@users.noreply.github.com";
     extraConfig = {
       init.defaultBranch = "main";
       url = {
@@ -41,7 +42,7 @@
           insteadOf = "https://github.com";
         };
       };
-      user.signingkey = "7BA86B0DCD536EE0";
+      user.signingkey = "7DB0F3FF9D4A2470";
     };
     ignores = [
       ".direnv"
@@ -59,7 +60,6 @@
   home.sessionVariables = {
     EDITOR = "nvim";
   };
-
 
   home.stateVersion = "24.05";
 }

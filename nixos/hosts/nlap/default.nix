@@ -1,13 +1,15 @@
-{ config, pkgs, nixpkgs-unstable, ... }:
-
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ../../modules/system.nix
-      ../../modules/docker.nix
-      ../../modules/hyprland.nix
-    ];
+  config,
+  pkgs,
+  nixpkgs-unstable,
+  ...
+}: {
+  imports = [
+    ./hardware-configuration.nix
+    ../../modules/system.nix
+    ../../modules/docker.nix
+    ../../modules/hyprland.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -39,8 +41,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs;
-  let
+  environment.systemPackages = with pkgs; let
     unstable = nixpkgs-unstable.legacyPackages.${pkgs.system};
   in [
     git
@@ -49,7 +50,9 @@
     vim
     wget
     firefox
-  
+
+    alejandra
+
     gcc
     patchelf
     pkg-config
@@ -67,6 +70,9 @@
     # pinentryPackage = "curses";
     # enableSSHSupport = true;
   };
+
+  # Enable SSH Agent
+  programs.ssh.startAgent = true;
 
   # Enviroments
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
