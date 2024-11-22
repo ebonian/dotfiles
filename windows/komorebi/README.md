@@ -1,4 +1,4 @@
-Setup Komorebi with Autohotkey
+# Komorebi Configuration
 
 - Install [Autohotkey](https://www.autohotkey.com/) (best with Scoop)
 - [Disable Windows Key](https://www.maketecheasier.com/disable-lock-screen-shortcut-key-windows/)
