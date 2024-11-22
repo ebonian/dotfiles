@@ -9,7 +9,6 @@
 
     ../../modules/docker.nix
     ../../modules/hyprland.nix
-    ../../modules/neovim.nix
     ../../modules/system.nix
   ];
 

@@ -17,6 +17,8 @@
   home.packages = with pkgs; let
     unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
   in [
+    unstable.neovim
+
     zip
     unzip
     fastfetch
