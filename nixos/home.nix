@@ -7,6 +7,7 @@
   imports = [
     ./modules/zoxide.nix
 
+    ./home/fastfetch
     ./home/firefox
     ./home/hyprland
     ./home/kitty
@@ -23,7 +24,6 @@
 
     zip
     unzip
-    fastfetch
 
     unstable.cargo
     unstable.rustc
