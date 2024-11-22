@@ -9,6 +9,7 @@
 
     ./home/firefox
     ./home/hyprland
+    ./home/kitty
     ./home/rofi
   ];
 
@@ -28,7 +29,6 @@
     unstable.rustc
     unstable.rust-analyzer
 
-    kitty
     vscodium-fhs
 
     libnotify
