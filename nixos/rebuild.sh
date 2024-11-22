@@ -17,8 +17,11 @@ fi
 alejandra . &>/dev/null \
   || ( alejandra . ; echo "formatting failed!" && exit 1)
 
+# Add all
+git add .
+
 # Show your changes
-git diff -U0 '*.nix' '*.flake' '*.toml'
+# git diff -U0 '*.nix' '*.flake' '*.toml'
 
 echo "NixOS Rebuilding with flakes..."
 

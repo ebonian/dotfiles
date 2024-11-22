@@ -8,6 +8,7 @@
     ./modules/zoxide.nix
 
     ./home/hyprland
+    ./home/rofi
   ];
 
   home.username = "ebonian";
@@ -25,10 +26,7 @@
     unstable.rust-analyzer
 
     kitty
-
     vscodium-fhs
-
-    wofi
 
     libnotify
   ];
