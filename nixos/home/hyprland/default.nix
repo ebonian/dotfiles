@@ -34,4 +34,12 @@
       name = "Adwaita";
     };
   };
+
+  home.packages = with pkgs; [
+    brightnessctl
+
+    wofi
+
+    networkmanagerapplet
+  ];
 }
