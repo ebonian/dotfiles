@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ./modules/fastfetch
+    ./modules/fastfetch.nix
     ./modules/zoxide.nix
 
     ./home/firefox
