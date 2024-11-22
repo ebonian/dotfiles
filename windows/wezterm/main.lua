@@ -1,13 +1,7 @@
--- wezterm config
 local wezterm = require 'wezterm'
-
 local config = wezterm.config_builder()
 
-config.default_prog = { 'C:/Program Files/Git/bin/bash.exe', '-i', '-l' }
-config.window_close_confirmation = 'NeverPrompt'
-
-
--- config modules
+local program = require 'program'
 local appearance = require 'appearance'
 local keybinds = require 'keybinds'
 
@@ -28,7 +22,7 @@ bar.apply_to_config(
                 enabled = false
             },
             clock = {
-                enabled = false,
+                enabled = true,
             },
             cwd = {
                 enabled = false,
@@ -37,6 +31,7 @@ bar.apply_to_config(
     }
 )
 
+program.apply_to_config(config)
 appearance.apply_to_config(config)
 keybinds.apply_to_config(config)
 
