@@ -29,6 +29,8 @@
     vscodium-fhs
 
     wofi
+
+    libnotify
   ];
 
   programs.git = {
