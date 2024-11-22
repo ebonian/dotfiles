@@ -34,9 +34,9 @@
 
     fontconfig = {
       defaultFonts = {
-        serif = ["Noto Sans Thai Looped"];
-        sansSerif = ["Noto Sans Thai Looped"];
-        monospace = ["Noto Sans Thai Looped"];
+        serif = ["Noto Sans Thai"];
+        sansSerif = ["Noto Sans Thai"];
+        monospace = ["Noto Sans Thai"];
       };
     };
 
