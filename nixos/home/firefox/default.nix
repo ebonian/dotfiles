@@ -32,8 +32,8 @@ in {
         name = "default";
         isDefault = true;
         settings = {};
+        search.engines = searchengines;
       };
     };
-    search.engines = searchengines;
   };
 }
