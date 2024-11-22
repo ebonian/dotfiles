@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
 
     ../../modules/docker.nix
+    ../../modules/firefox.nix
     ../../modules/hyprland.nix
     ../../modules/system.nix
   ];

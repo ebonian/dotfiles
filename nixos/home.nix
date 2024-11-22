@@ -7,6 +7,7 @@
   imports = [
     ./modules/zoxide.nix
 
+    ./home/firefox
     ./home/hyprland
     ./home/rofi
   ];
