@@ -4,8 +4,7 @@
   lib,
   ...
 }: {
-  programs.neovim = {
+  nixpkgs-unstable.neovim = {
     enable = true;
-    version = "0.10.0";
   };
 }
