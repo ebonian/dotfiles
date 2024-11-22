@@ -5,9 +5,9 @@
   ...
 }: {
   imports = [
+    ./modules/fastfetch
     ./modules/zoxide.nix
 
-    ./home/fastfetch
     ./home/firefox
     ./home/hyprland
     ./home/kitty
