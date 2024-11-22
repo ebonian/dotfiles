@@ -15,7 +15,7 @@ fi
 
 # Autoformat your nix files
 alejandra . &>/dev/null \
-  || ( alejandra . ; echo "formatting failed!" && exit 1)
+  || ( alejandra . ; echo "Formatting failed!" && exit 1)
 
 # Add all
 git add .
@@ -25,9 +25,9 @@ git add .
 
 echo "NixOS Rebuilding with flakes..."
 
-# Rebuild using flakes, output simplified errors, log tracebacks
-sudo nixos-rebuild switch --flake ~/dotfiles/nixos# &>nixos-switch.log \
-  || (cat nixos-switch.log | grep --color error && exit 1)
+# Rebuild using flakes, show full output, and log tracebacks
+sudo nixos-rebuild switch --flake ~/dotfiles/nixos# | tee nixos-switch.log \
+  || (echo "Error during rebuild, see details below:" && cat nixos-switch.log && exit 1)
 
 # Get current generation metadata
 current=$(nixos-rebuild list-generations | grep current)
