@@ -6,9 +6,11 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/system.nix
+
     ../../modules/docker.nix
     ../../modules/hyprland.nix
+    ../../modules/neovim.nix
+    ../../modules/system.nix
   ];
 
   # Bootloader.
@@ -55,7 +57,6 @@
     unstable = nixpkgs-unstable.legacyPackages.${pkgs.system};
   in [
     git
-    neovim
 
     vim
     wget
