@@ -58,6 +58,7 @@
     extraGroups = ["networkmanager" "wheel" "docker" "plugdev"];
     initialPassword = "password";
   };
+  users.defaultUserShell = pkgs.zsh;
 
   # Drive Mounting
   services.devmon.enable = true;

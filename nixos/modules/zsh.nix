@@ -27,6 +27,4 @@
       theme = "robbyrussell";
     };
   };
-
-  users.defaultUserShell = pkgs.zsh;
 }
