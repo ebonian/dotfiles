@@ -11,6 +11,7 @@
     ../../modules/firefox.nix
     ../../modules/hyprland.nix
     ../../modules/system.nix
+    ../../modules/zsh.nix
   ];
 
   # Bootloader.
