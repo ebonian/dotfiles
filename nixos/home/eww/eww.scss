@@ -1,42 +1,16 @@
+// $background: #121212;
+// $foreground: #f5f5f5;
+// $accent-color: #c5cdda;
+$rad: 4px;
+
+@import "colors";
+@import "styling";
+
 * {
-  all: unset; // Unsets everything so you can style everything from scratch
+  font-family: "IBM Plex Sans", "Noto Sans CJK JP", "Material Symbols Rounded";
+  font-weight: bold;
+  font-size: 14px;
+  background-color: transparent;
+  box-shadow: none;
 }
 
-// Global Styles
-.bar {
-  background-color: #3a3a3a;
-  color: #b0b4bc;
-  padding: 10px;
-}
-
-// Styles on classes (see eww.yuck for more information)
-
-.sidestuff slider {
-  all: unset;
-  color: #ffd5cd;
-}
-
-.metric scale trough highlight {
-  all: unset;
-  background-color: #d35d6e;
-  color: #000000;
-  border-radius: 10px;
-}
-
-.metric scale trough {
-  all: unset;
-  background-color: #4e4e4e;
-  border-radius: 50px;
-  min-height: 3px;
-  min-width: 50px;
-  margin-left: 10px;
-  margin-right: 20px;
-}
-
-.label-ram {
-  font-size: large;
-}
-
-.workspaces button:hover {
-  color: #d35d6e;
-}

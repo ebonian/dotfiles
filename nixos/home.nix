@@ -26,10 +26,16 @@
   home.packages = with pkgs; let
     unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
   in [
-    # rust
+    # languages
     unstable.cargo
     unstable.rustc
     unstable.rust-analyzer
+    (pkgs.python3.withPackages (python-pkgs:
+      with python-pkgs; [
+        pandas
+        numpy
+        requests
+      ]))
 
     # programs
     unstable.neovim
