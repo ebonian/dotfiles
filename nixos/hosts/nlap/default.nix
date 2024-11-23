@@ -27,14 +27,12 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable asusctl
+  services.asusd = {
+    enable = true;
+    enableUserService = true;
+  };
   services.supergfxd.enable = true;
   systemd.services.supergfxd.path = [pkgs.pciutils];
-  services = {
-    asusd = {
-      enable = true;
-      enableUserService = true;
-    };
-  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
