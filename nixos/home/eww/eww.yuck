@@ -1,295 +1,75 @@
 (defwidget bar []
-  (centerbox :orientation "v" :hexpand false
-    (box :valign "start" :hexpand false :vexpand true :orientation "v" :space-evenly false
-      (launch)
-      (dashbutton)
-      (powerbutton)
-    )
+  (centerbox :orientation "h"
+    (workspaces)
+    (music)
+    (sidestuff)))
 
-    (workspaces :halign "center" :vexpand true :hexpand false :orientation "v")
+(defwidget sidestuff []
+  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
+    (metric :label "🔊"
+            :value volume
+            :onchange "amixer -D pulse sset Master {}%")
+    (metric :label ""
+            :value {EWW_RAM.used_mem_perc}
+            :onchange "")
+    (metric :label "💾"
+            :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+            :onchange "")
+    time))
 
-    (box :valign "end" :hexpand false :vexpand true :orientation "v" :space-evenly false
-      (battery)
-      (wifi)
-      (mem :thickness 4 :icon "")
-      (cpu :thickness 4 :icon "")
-      (disk :thickness 4 :icon "")
-      (time)
-    )
-  )
-)
-
-(defpoll brightness :interval "999h" :initial 0 `brightnessctl -m | awk -F, '{print substr($4, 0, length($4)-1)}'`)
-(defpoll volume :interval "999h" :initial 0 `pamixer --get-volume`)
-(defpoll micvolume :interval "999h" :initial 0 `pamixer --get-volume --source 1`)
-(defwidget dashboard []
-  (box :orientation "v" 
-    (box :class "info_box" :orientation "v" :space-evenly false
-      (box :class "calendar_box"
-        (calendar :width 200 :class "cal")
-      )
-
-      (box :class "slider_box" :orientation "v" :vexpand false :hexpand false
-        (box :space-evenly false
-            (label :class "slider_icon" :text "")
-            (scale :min 1 :max 101 :width 315 :class "brightness_slider" :value brightness :onchange "brightnessctl set {}%" :height 10)
-        )
-        (box :space-evenly false
-          (label :class "slider_icon" :text "墳")
-          (scale :min 1 :max 101 :width 315 :class "volume_slider" :value volume :onchange "pamixer --set-volume $(echo {} | sed 's/[.].*$//')")
-        )
-        (box :space-evenly false
-          (label :class "slider_icon" :text "")
-          (scale :min 1 :max 101 :width 315 :class "micvolume_slider" :value micvolume :onchange "pamixer --set-volume $(echo {} | sed 's/[.].*$//') --source 1")
-        )
-      )
-      (box :class "sysinfo_box" :orientation "h" :vexpand true :spacing 15 
-        (mem :thickness 12 :icon "")
-        (cpu :thickness 12 :icon "")
-        (disk :thickness 12 :icon "")
-      )
-    )
-    (box :class "notification_box"
-    )     
-  )
-)
-
-
-
-
-;; Variables
-(defvar time false)
-(defvar cal false)
-
-;; ━━━ WIDGETS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-;; ━━━ MEMORY ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-(defwidget dashbutton[]
-  (button :class "reg-btn dashbutton" :onclick "eww open dashboard --toggle" "舘")
-)
-
-
-
-;; ━━━ MEMORY ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-(defwidget mem [icon thickness]
-  (box :vexpand "false" :hexpand "false"
-    (circular-progress  :value {EWW_RAM.used_mem_perc}
-                        :class "membar"
-                        :thickness {thickness}
-                        :start-at 75
-
-        (label :class "iconmem" :text {icon})
-    )
-  )
-)
-
-;; ━━━ CPU ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-(defwidget cpu [icon thickness]
-  (box :vexpand "false" :hexpand "false"
-    (circular-progress  :value {EWW_CPU.avg}
-                        :class "cpubar"
-                        :thickness {thickness}
-                        :start-at 75
-
-      (label :class "iconcpu" :text {icon})
-    )
-  )
-)
-
-;; ━━━ DISK ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-(defwidget disk [icon thickness]
-  (box :vexpand "false" :hexpand "false"
-    (circular-progress  :value {EWW_DISK["/"].used_perc}
-                        :class "diskbar"
-                        :thickness {thickness}
-                        :start-at 75
-      (label :class "icondisk" :text {icon})
-
-    )
-  )
-)
-
-
-;; ━━━ WIFI ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-(defvar wifi "{}")
-(defpoll wifi :interval "30s" "./scripts/wifi.sh")
-
-(defwidget wifi []
- (box :vexpand false :hexpand false :orientation "v"
-   (label :text {wifi.icon}
-          :limit-width 10
-          :tooltip {wifi.status}
-          :class "wifi"
-    )
-  )
-)
-
-;; ━━━ BATTERY ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-(defvar battery "{}")
-(defpoll battery :interval "60s" "./scripts/battery.sh")
-
-(defwidget battery []
-   (label :text {battery.icon}
-          :limit-width 10
-          :tooltip "${battery.status}: ${battery.percent}"
-          :class "battery"
-  )
-)
-
-
-;; ━━━ VOLUME ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-(defvar volume-level 50)
-(defvar volume-muted false)
-
-(defwindow volume
-  :monitor 0
-  :geometry (geometry :y "100px" :x "0px" :width "250px" :height "200px" :anchor "center bottom")
-  :windowtype "dock"
-  :wm-ignore true
-  :stacking "fg"
-
-  (box :class "volume-window"
-       :orientation "v"
-       :space-evenly "false"
-    (box :class "volume-widget"
-         :orientation "h"
-         :space-evenly false
-         :spacing 10
-      (label :text {volume-muted ? "" :
-                    volume-level == 0 ? "" :
-                    volume-level < 32 ? "" :
-                    volume-level < 65 ? "" :
-                    ""}
-
-             :class 'volume-icon ${volume-muted ? "volume-icon-muted" : ""}'
-      )
-      (scale :class 'volume-slider ${volume-muted ? "volume-slider-muted" : ""}'
-             :hexpand "true"
-             :min 0
-             :max 100
-             :height 8
-             :marks true
-             :value volume-level
-             :onchange "pamixer --set-volume {}"))))
-
-;; ━━━ TIME ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-(defpoll hour :interval "10s" "date +%H")
-(defpoll minute :interval "10s" "date +%M")
-(defpoll dateVar :interval "600s" "date '+%A %d.%m.%y'")
-
-(defwidget time []
-  (eventbox :cursor "hand"  :hexpand false :vexpand false
-                :tooltip "${dateVar}"
-    (box :orientation "v" :hexpand false :vexpand false :space-evenly false :class "clock"
-    (button		:class "date"
-                :onclick ""	"${hour}")
-
-    (button		:class "date"
-                :onclick ""	"${minute}")
-    )
-  )
-)
-
-
-
-
-(defvar bright-level 50)
-(defvar bright-muted false)
-(defwindow brightness
-  :monitor 0
-  :geometry (geometry :y "-60px" :x "60px" :width "300px" :height "150px" :anchor "bottom left")
-  :wm-ignore true
-  :stacking "fg"
-
-  (box :class "volume-window"
-       :orientation "v"
-       :space-evenly "false"
-    (box :class "volume-widget"
-         :orientation "h"
-         :space-evenly false
-         :spacing 10
-      (label :text ""
-             :class 'volume-icon'
-      )
-      (scale :class 'volume-slider'
-             :hexpand "true"
-             :min 0
-             :max 100
-             :height 8
-             :marks true
-             :value bright-level
-             :onchange "brightnessctl set {}%"))))
-(defwidget launch []
-  (button		:class "reg-btn launchbutton"
-                :hexpand true
-                :onclick "wofi --show run --xoffset=1670 --yoffset=12 --width=230px --height=984 --style=$HOME/.config/wofi.css --term=footclient --prompt=Run &" "")
-)
-
-(defwidget powerbutton []
-  (eventbox :cursor "hand"
-  (button		:class "reg-btn powerbutton"
-                :onclick "eww open powermenu --toggle &"	"")
-  )
-)
-                                                  (defwidget powermenucontent []
-                                                  (box :orientation "h"
-  :class "powermenu-container"
-  (box :class "shutdown-btn-box"
-       :orientation "h"
-    (button :class "btn"
-            :tooltip "Shutdown"
-            :onclick "eww close powermenu && shutdown now"
-      "⏻")
-    )
-  (box :class "reboot-btn-box"
-       :orientation "h"
-    (button :class "btn"
-            :tooltip "Reboot"
-            :onclick "eww close powermenu && reboot"
-      "")
-    )
-  (box :class "exit-btn-box"
-       :orientation "h"
-    (button :class "btn"
-            :tooltip "Suspend"
-            :onclick "systemctl suspend"
-      "")
-    )
-  )
-)
-
-(defwindow powermenu
-  :monitor 0
-  :geometry (geometry :x "0%"
-  :y "0%"
-  :width "30%"
-  :height "15%"
-  :anchor "center center")
-  :wm-ignore true
-  (powermenucontent))
-
-(deflisten workspaces_listen "./scripts/workspaces.sh")
 (defwidget workspaces []
-  (literal :content workspaces_listen))
+  (box :class "workspaces"
+       :orientation "h"
+       :space-evenly true
+       :halign "start"
+       :spacing 10
+    (button :onclick "wmctrl -s 0" 1)
+    (button :onclick "wmctrl -s 1" 2)
+    (button :onclick "wmctrl -s 2" 3)
+    (button :onclick "wmctrl -s 3" 4)
+    (button :onclick "wmctrl -s 4" 5)
+    (button :onclick "wmctrl -s 5" 6)
+    (button :onclick "wmctrl -s 6" 7)
+    (button :onclick "wmctrl -s 7" 8)
+    (button :onclick "wmctrl -s 8" 9)))
 
-(defwindow dashboard
-  :monitor 0
-  :geometry (geometry 
-  :height "1080px" 
-  :width "350px"
-  :x "48px"
-  :y "0px"
-  :anchor "top left")
-  :stacking "fg"
-  :class "dashboard"
-  (dashboard))
+(defwidget music []
+  (box :class "music"
+       :orientation "h"
+       :space-evenly false
+       :halign "center"
+    {music != "" ? "🎵${music}" : ""}))
+
+
+(defwidget metric [label value onchange]
+  (box :orientation "h"
+       :class "metric"
+       :space-evenly false
+    (box :class "label" label)
+    (scale :min 0
+           :max 101
+           :active {onchange != ""}
+           :value value
+           :onchange onchange)))
+
+
+
+(deflisten music :initial ""
+  "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
+
+(defpoll volume :interval "1s"
+  "scripts/getvol")
+
+(defpoll time :interval "10s"
+  "date '+%H:%M %b %d, %Y'")
 
 (defwindow bar
   :monitor 0
-  :exclusive false 
-  :geometry (geometry :height "1080px" :x "-4px" :y "0px"
-  :width "52px"
-  :anchor "top left")
-  :stacking "fg"
+  :windowtype "dock"
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "90%"
+                      :height "10px"
+                      :anchor "top center")
+  :reserve (struts :side "top" :distance "4%")
   (bar))
