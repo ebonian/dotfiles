@@ -3,7 +3,13 @@
   pkgs,
   nixpkgs-unstable,
   ...
-}: {
+}: let
+  g14_patches = fetchGit {
+    url = "https://gitlab.com/dragonn/linux-g14";
+    ref = "6.11";
+    rev = "c75ff27d0e3a7faf7f50c04a8a23014909e70980";
+  };
+in {
   imports = [
     ./hardware-configuration.nix
 
@@ -14,9 +20,20 @@
     ../../modules/zsh.nix
   ];
 
-  # Bootloader.
+  # Boot loader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Boot kernel
+  boot.kernelPackages = pkgs.linuxPackages_6_11;
+  boot.kernelPatches = map (patch: {inherit patch;}) [
+    "${g14_patches}/0001-Bluetooth-btusb-Add-2-USB-HW-IDs-for-MT7925-0xe118-e.patch"
+    "${g14_patches}/0032-Bluetooth-btusb-Add-a-new-PID-VID-0489-e0f6-for-MT7922.patch"
+    "${g14_patches}/0062-hid-asus-use-hid-for-brightness-control-on-keyboard.patch"
+    "${g14_patches}/sys-kernel_arch-sources-g14_files-0004-more-uarches-for-kernel-6.8-rc4+.patch"
+    "${g14_patches}/sys-kernel_arch-sources-g14_files-0047-asus-nb-wmi-Add-tablet_mode_sw-lid-flip.patch"
+    "${g14_patches}/sys-kernel_arch-sources-g14_files-0048-asus-nb-wmi-fix-tablet_mode_sw_int.patch"
+  ];
 
   # Networking
   networking.hostName = "nlap"; # Define your hostname.
@@ -28,6 +45,11 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable asusctl
+  services.power-profiles-daemon.enable = true;
+  systemd.services.power-profiles-daemon = {
+    enable = true;
+    wantedBy = ["multi-user.target"];
+  };
   services.asusd = {
     enable = true;
     enableUserService = true;
