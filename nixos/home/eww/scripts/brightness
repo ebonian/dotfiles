@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-brillo -G | cut -d '.' -f1
-watchexec -w /home/$USER/.config/eww/files/brightness sh -c "brillo -G | cut -d '.' -f1"
