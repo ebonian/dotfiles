@@ -89,6 +89,7 @@ in {
     vim
     wget
     firefox
+    dunst
   ];
 
   # Enable card daemon

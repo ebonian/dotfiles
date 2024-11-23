@@ -2,12 +2,12 @@
 
 # Get keyboard brightness
 get_kbd_backlight() {
-	echo $(brightnessctl -d '*::kbd_backlight' -m | cut -d, -f4)
+	echo $(brightnessctl -d 'asus::kbd_backlight' -m | cut -d, -f4)
 }
 
 # Change brightness
 change_kbd_backlight() {
-	brightnessctl -d *::kbd_backlight set "$1"
+	brightnessctl -d asus::kbd_backlight set "$1"
 }
 
 # Execute accordingly

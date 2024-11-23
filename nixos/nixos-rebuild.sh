@@ -17,7 +17,7 @@ fi
 alejandra . &>/dev/null \
   || ( alejandra . ; echo "Formatting failed!" && exit 1)
 
-# Add all
+# Add all changes
 git add .
 
 # Show your changes
@@ -29,11 +29,14 @@ echo "NixOS Rebuilding with flakes..."
 sudo nixos-rebuild switch --flake ~/dotfiles/nixos# | tee nixos-switch.log \
   || (echo "Error during rebuild, see details below:" && cat nixos-switch.log && exit 1)
 
-# Get current generation metadata
-current=$(nixos-rebuild list-generations | grep current)
+# Get current generation number
+generation=$(nixos-rebuild list-generations | grep current | awk '{print $1}')
 
-# Commit all changes with the generation metadata
-git commit -m "$current"
+# Prompt the user for a commit message
+read -p "Enter a commit message: " user_message
+
+# Commit all changes with the generation number and user message
+git commit -m "$generation $user_message"
 
 # Back to where you were
 popd
