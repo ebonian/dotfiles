@@ -43,6 +43,7 @@
     yq
     ripgrep
     obs-studio
+    arandr
   ];
 
   # Git configurations
