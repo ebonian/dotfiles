@@ -114,6 +114,10 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
   min-width: 1.6em;
 }
 
+.titlebar-buttonbox-container {
+  display: none;
+}
+
 #tracking-protection-icon-container,
 #urlbar-zoom-button,
 #star-button-box,
