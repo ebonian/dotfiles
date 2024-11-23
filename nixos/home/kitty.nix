@@ -1,10 +1,10 @@
 {pkgs, ...}: {
-  home.file.".config/rofi/config.rasi" = {
-    source = ./config.rasi;
+  home.file.".config/kitty" = {
+    source = ./kitty/kitty.conf;
     recursive = true;
   };
 
   home.packages = with pkgs; [
-    rofi
+    kitty
   ];
 }

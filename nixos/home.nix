@@ -8,11 +8,10 @@
     ./modules/fastfetch.nix
     ./modules/zoxide.nix
 
-    ./home/firefox
-    ./home/hyprland
-    ./home/kitty
-    ./home/rofi
-    ./home/zsh
+    ./home/firefox.nix
+    ./home/hyprland.nix
+    ./home/kitty.nix
+    ./home/zsh.nix
   ];
 
   # Enable home manager

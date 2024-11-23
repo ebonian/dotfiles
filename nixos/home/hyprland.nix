@@ -5,17 +5,8 @@
   lib,
   ...
 }: {
-  home.file.".config/hypr/hyprland.conf" = {
-    source = ./hyprland.conf;
-  };
-
-  home.file.".config/hypr/configs" = {
-    source = ./configs;
-    recursive = true;
-  };
-
-  home.file.".config/hypr/scripts" = {
-    source = ./scripts;
+  home.file.".config/hypr" = {
+    source = ./hyprland;
     recursive = true;
   };
 
@@ -39,7 +30,6 @@
     };
   };
 
-  # Hyprland related packages
   home.packages = with pkgs; [
     # programs
     eww

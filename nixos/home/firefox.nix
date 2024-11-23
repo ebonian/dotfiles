@@ -25,7 +25,7 @@
   };
 in {
   home.file.".mozilla/firefox/default/chrome" = {
-    source = ./chrome;
+    source = ./firefox/chrome;
     recursive = true;
   };
 
