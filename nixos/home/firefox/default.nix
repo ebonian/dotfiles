@@ -37,7 +37,7 @@ in {
         name = "default";
         isDefault = true;
         settings = {
-          toolkit.legacyUserProfileCustomizations.stylesheets = true;
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         };
         search = {
           engines = searchengines;
