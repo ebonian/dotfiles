@@ -24,6 +24,11 @@
     "Google".metaData.alias = "@g";
   };
 in {
+  home.file.".mozilla/firefox/default/chrome" = {
+    source = ./chrome;
+    recursive = true;
+  };
+
   programs.firefox = {
     enable = true;
     profiles = {
@@ -31,7 +36,9 @@ in {
         id = 0;
         name = "default";
         isDefault = true;
-        settings = {};
+        settings = {
+          toolkit.legacyUserProfileCustomizations.stylesheets = true;
+        };
         search = {
           engines = searchengines;
           force = true;
