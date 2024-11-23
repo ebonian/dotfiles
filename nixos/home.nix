@@ -7,6 +7,7 @@
   imports = [
     ./modules/fastfetch.nix
     ./modules/zoxide.nix
+    ./modules/zsh.nix
 
     ./home/firefox
     ./home/hyprland
