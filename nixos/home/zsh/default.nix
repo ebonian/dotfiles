@@ -8,7 +8,9 @@
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
-      ll = "ls -l";
+      ls = "exa --icons";
+      ll = "exa --icons -l";
+      la = "exa --icons -la";
       rebuild = "~/dotfiles/nixos/nixos-rebuild.sh";
       cleanup = "~/dotfiles/nixos/nixos-cleanup.sh";
     };
