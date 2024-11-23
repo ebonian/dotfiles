@@ -10,6 +10,7 @@
     shellAliases = {
       ll = "ls -l";
       rebuild = "~/dotfiles/nixos/nixos-rebuild.sh";
+      cleanup = "~/dotfiles/nixos/nixos-clean.sh";
     };
     history = {
       size = 10000;
