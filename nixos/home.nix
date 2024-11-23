@@ -8,6 +8,7 @@
     ./modules/fastfetch.nix
     ./modules/zoxide.nix
 
+    ./home/dunst.nix
     ./home/firefox.nix
     ./home/hyprland.nix
     ./home/kitty.nix

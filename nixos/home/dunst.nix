@@ -1,10 +1,10 @@
 {pkgs, ...}: {
-  home.file.".config/kitty" = {
-    source = ./kitty;
+  home.file.".config/dunst" = {
+    source = ./dunst;
     recursive = true;
   };
 
   home.packages = with pkgs; [
-    kitty
+    dunst
   ];
 }
