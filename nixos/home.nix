@@ -7,12 +7,12 @@
   imports = [
     ./modules/fastfetch.nix
     ./modules/zoxide.nix
-    ./modules/zsh.nix
 
     ./home/firefox
     ./home/hyprland
     ./home/kitty
     ./home/rofi
+    ./home/zsh
   ];
 
   home.username = "ebonian";
