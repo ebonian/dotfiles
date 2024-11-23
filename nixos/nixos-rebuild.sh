@@ -42,4 +42,4 @@ git commit -m "$generation $user_message"
 popd
 
 # Notify all OK!
-# notify-send -e "NixOS Rebuilt OK!" --icon=software-update-available
+notify-send -e "Rebuilt NixOS successfully!"
