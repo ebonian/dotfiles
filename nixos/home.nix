@@ -36,6 +36,7 @@
         numpy
         requests
       ]))
+    lua
 
     # programs
     unstable.neovim

@@ -38,6 +38,7 @@ in {
   # Networking
   networking.hostName = "nlap";
   networking.networkmanager.enable = true;
+  networking.wireless.iwd.enable = true;
 
   # Enable asusctl
   services.power-profiles-daemon.enable = true;
@@ -83,6 +84,8 @@ in {
     alejandra
     zip
     unzip
+    acpi
+    tlp
 
     # programs
     git
