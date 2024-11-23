@@ -11,6 +11,7 @@
       ls = "exa --icons";
       ll = "exa --icons -l";
       la = "exa --icons -la";
+      tree = "exa --icons -T";
       rebuild = "~/dotfiles/nixos/nixos-rebuild.sh";
       cleanup = "~/dotfiles/nixos/nixos-cleanup.sh";
     };
