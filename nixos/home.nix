@@ -9,6 +9,7 @@
     ./modules/zoxide.nix
 
     ./home/dunst.nix
+    ./home/eww.nix
     ./home/firefox.nix
     ./home/hyprland.nix
     ./home/kitty.nix
@@ -33,8 +34,11 @@
     # programs
     unstable.neovim
     vscodium-fhs
+    wofi
 
     # utilities
+    brightnessctl
+    networkmanagerapplet
     libnotify
     grim
     slurp

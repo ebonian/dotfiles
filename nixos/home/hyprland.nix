@@ -29,14 +29,4 @@
       name = "Adwaita";
     };
   };
-
-  home.packages = with pkgs; [
-    # programs
-    eww
-    wofi
-
-    # utilities
-    brightnessctl
-    networkmanagerapplet
-  ];
 }
