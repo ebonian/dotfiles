@@ -15,26 +15,37 @@
     ./home/zsh
   ];
 
+  # Enable home manager
+  programs.home-manager.enable = true;
+
   home.username = "ebonian";
   home.homeDirectory = "/home/ebonian";
 
+  # Home profile packages
   home.packages = with pkgs; let
     unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
   in [
-    unstable.neovim
-
-    zip
-    unzip
-
+    # rust
     unstable.cargo
     unstable.rustc
     unstable.rust-analyzer
 
+    # programs
+    unstable.neovim
     vscodium-fhs
 
+    # utilities
     libnotify
+    grim
+    slurp
+    swappy
+    eza
+    yq
+    ripgrep
+    obs-studio
   ];
 
+  # Git configurations
   programs.git = {
     enable = true;
     userName = "ebonian";
@@ -54,13 +65,13 @@
     ];
   };
 
-  programs.home-manager.enable = true;
+  # Enable direnv
   programs.direnv.enable = true;
 
+  # Setup editor variable
   programs.bash.sessionVariables = {
     EDITOR = "nvim";
   };
-
   home.sessionVariables = {
     EDITOR = "nvim";
   };

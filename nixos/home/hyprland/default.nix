@@ -39,11 +39,14 @@
     };
   };
 
+  # Hyprland related packages
   home.packages = with pkgs; [
-    brightnessctl
-
+    # programs
+    eww
     wofi
 
+    # utilities
+    brightnessctl
     networkmanagerapplet
   ];
 }

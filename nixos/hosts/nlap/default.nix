@@ -24,7 +24,7 @@ in {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Boot kernel
+  # Patch boot kernel
   boot.kernelPackages = pkgs.linuxPackages_6_11;
   boot.kernelPatches = map (patch: {inherit patch;}) [
     "${g14_patches}/0001-Bluetooth-btusb-Add-2-USB-HW-IDs-for-MT7925-0xe118-e.patch"
@@ -36,13 +36,8 @@ in {
   ];
 
   # Networking
-  networking.hostName = "nlap"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.hostName = "nlap";
   networking.networkmanager.enable = true;
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable asusctl
   services.power-profiles-daemon.enable = true;
@@ -72,37 +67,36 @@ in {
     pulse.enable = true;
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # System profile packages
   environment.systemPackages = with pkgs; let
     unstable = nixpkgs-unstable.legacyPackages.${pkgs.system};
   in [
-    git
+    # system
+    asusctl
 
-    vim
-    wget
-    firefox
-
-    alejandra
-
+    # utilities
     gcc
     patchelf
     pkg-config
     openssl
-
     dconf
+    alejandra
+    zip
+    unzip
 
-    asusctl
+    # programs
+    git
+    vim
+    wget
+    firefox
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
+  # Enable card daemon
   services.pcscd.enable = true;
+
+  # Enable GPG key
   programs.gnupg.agent = {
     enable = true;
-    # pinentryPackage = "curses";
-    # enableSSHSupport = true;
   };
 
   # Enable SSH Agent
