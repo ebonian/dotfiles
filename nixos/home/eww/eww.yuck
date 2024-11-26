@@ -1,20 +1,111 @@
-(defwindow example
-  :monitor 0
-  :geometry (geometry :x "0%"
-    :y "20px"
-    :width "90%"
-    :height "30px"
-  :anchor "top center")
-  :stacking "fg"
-  :reserve (struts :distance "40px" :side "top")
-  :windowtype "dock"
-  :wm-ignore false
-  (greeter :text "Say hello!"
-  :name "Tim"))
+;; Clock Widgets ;;
+(defwidget time []
+  (box	:orientation "v"
+    :class "time"
+    :valign "end"
+    (button	:onclick "scripts/popup calendar"
+    :class "time-hour" hour)
+    (button	:onclick "scripts/popup calendar"
+    :class "time-min"  min)))
+(defpoll hour	:interval "1s"	"date '+%H'")
+(defpoll min	:interval "1s"	"date '+%M'")
 
-(defwidget greeter [?text name]
-  (box :orientation "horizontal"
-    :halign "center"
-    text
-    (button :onclick "notify-send 'Hello' 'Hello, ${name}'"
-    "Greet")))
+;; Powermenu Widgets ;;
+(defwidget power []
+  (eventbox	:onhover "eww update power=true"
+    :onhoverlost "eww update power=false"
+    (box		:orientation "v"
+      :space-evenly "false"
+      :vexpand "false"
+      :class "powermenu"
+      (revealer	:transition "slideup"
+        :reveal power
+        :duration "550ms"
+        (box		:orientation "v"
+          :space-evenly "false"
+          
+          (button   	:class "button-bspres"
+            :tooltip "BSPWM Restart"
+          :onclick "bspc wm -r" "" )
+          
+          (button		:class "button-reb"
+            :tooltip "Reboot"
+          :onclick "reboot"	"")
+          
+          (button		:class "button-quit"
+            :tooltip "Logout"
+          :onclick "killall bspwm" "")
+          
+          (button		:class "button-lock"
+            :tooltip "Lock Screen"
+          :onclick "betterlockscreen -l"	"")))
+      
+      (button		:class "button-off"
+        :tooltip "Shutdown"
+      :onclick "shutdown now"	""))))
+(defvar power false)
+
+
+;; Top Widgets ;;
+(defwidget top []
+  (box
+    :orientation "v"
+    :space-evenly "false"
+    :valign "start"
+    "launcher"
+    "workspaces"
+  )
+)
+
+;; Bottom Widgets ;;
+(defwidget bottom []
+  (box
+    :orientation "v"
+    :space-evenly false
+    (time)
+    (power)
+  )
+)
+
+;; End Widgets ;;
+(defwidget end []
+  (box
+    :orientation "v"
+    :space-evenly "false"
+    :valign "end"
+    :spacing 5
+    "control"
+    (bottom)
+  )
+)
+
+;; Bar Widget ;;
+(defwidget bar []
+  (box
+    :class "eww_bar"
+    :orientation "v"
+    :vexpand false
+    :hexpand false
+    (top)
+    (end)
+  )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;
+;; Window Section's ;;
+;;;;;;;;;;;;;;;;;;;;;;
+
+;; Bar Window ;;
+(defwindow bar
+  :monitor 0
+  :stacking "fg"
+  :exclusive true
+  :geometry (geometry
+    :x "0"
+    :y "0"
+    :width "48px"
+    :height "1125px" ; 100% doesn't work so it depends on screen height
+    :anchor "left center"
+  )
+  (bar)
+)
