@@ -1,3 +1,29 @@
+;; Battery Widgets ;;
+(defpoll battery            :interval "1s"  "scripts/battery icon")
+(defpoll battery-cappacity	:interval "1s"	"scripts/battery percent")
+(defwidget bat []
+  (box
+    :orientation "v"
+    :space-evenly "false"
+    (label
+      :class "bat"
+      :halign "end"
+      :text battery
+      :tooltip "Battery: ${battery-cappacity}%"
+    )
+  )
+)
+
+;; Control Panel Widgets ;;
+(defwidget control []
+  (box
+    :orientation "v"
+    :space-evenly false
+    :class "control"
+    (bat)
+  )
+)
+
 ;; Clock Widgets ;;
 (defwidget time []
   (box	:orientation "v"
@@ -7,7 +33,7 @@
     :class "time-hour" hour)
     (button	:onclick "scripts/popup calendar"
     :class "time-min"  min)))
-(defpoll hour	:interval "1s"	"date '+%H'")
+(defpoll hour :interval "1s"	"date '+%H'")
 (defpoll min	:interval "1s"	"date '+%M'")
 
 ;; Powermenu Widgets ;;
@@ -74,7 +100,7 @@
     :space-evenly "false"
     :valign "end"
     :spacing 5
-    "control"
+    (control)
     (bottom)
   )
 )
