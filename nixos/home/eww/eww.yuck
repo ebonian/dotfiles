@@ -1,6 +1,6 @@
-;; Battery Widgets ;;
-(defpoll battery            :interval "1s"  "scripts/battery icon")
-(defpoll battery-cappacity	:interval "1s"	"scripts/battery percent")
+;; Battery Widget ;;
+(defpoll battery            :interval "1s"  "~/.config/eww/scripts/battery.sh icon")
+(defpoll battery-cappacity	:interval "1s"	"~/.config/eww/scripts/battery.sh percent")
 (defwidget bat []
   (box
     :orientation "v"
@@ -14,7 +14,7 @@
   )
 )
 
-;; Control Panel Widgets ;;
+;; Control Panel Widget ;;
 (defwidget control []
   (box
     :orientation "v"
@@ -24,62 +24,74 @@
   )
 )
 
-;; Clock Widgets ;;
-(defwidget time []
-  (box	:orientation "v"
-    :class "time"
-    :valign "end"
-    (button	:onclick "scripts/popup calendar"
-    :class "time-hour" hour)
-    (button	:onclick "scripts/popup calendar"
-    :class "time-min"  min)))
+;; Clock Widget ;;
 (defpoll hour :interval "1s"	"date '+%H'")
 (defpoll min	:interval "1s"	"date '+%M'")
+(defwidget time []
+  (box
+    :orientation "v"
+    :class "time"
+    :valign "end"
+    (box
+      :class "time-hour"
+      hour
+    )
+    (box
+      :class "time-min"
+      min
+    )
+  )
+)
 
-;; Powermenu Widgets ;;
+;; Powermenu Widget ;;
+(defvar power false)
 (defwidget power []
-  (eventbox	:onhover "eww update power=true"
+  (eventbox
+    :onhover "eww update power=true"
     :onhoverlost "eww update power=false"
-    (box		:orientation "v"
+    (box
+      :orientation "v"
       :space-evenly "false"
       :vexpand "false"
       :class "powermenu"
-      (revealer	:transition "slideup"
+      (revealer
+        :transition "slideup"
         :reveal power
         :duration "550ms"
-        (box		:orientation "v"
+        (box
+          :orientation "v"
           :space-evenly "false"
-          
-          (button   	:class "button-bspres"
-            :tooltip "BSPWM Restart"
-          :onclick "bspc wm -r" "" )
-          
-          (button		:class "button-reb"
-            :tooltip "Reboot"
-          :onclick "reboot"	"")
-          
-          (button		:class "button-quit"
-            :tooltip "Logout"
-          :onclick "killall bspwm" "")
-          
-          (button		:class "button-lock"
-            :tooltip "Lock Screen"
-          :onclick "betterlockscreen -l"	"")))
-      
-      (button		:class "button-off"
-        :tooltip "Shutdown"
-      :onclick "shutdown now"	""))))
-(defvar power false)
-
-
+          (button
+            :class "button-bspres"
+            :onclick "bspc wm -r" ""
+          )
+          (button
+            :class "button-reboot"
+            :onclick ""	""
+          )
+          (button
+            :class "button-quit"
+            :onclick "" ""
+          )
+          (button
+            :class "button-lock"
+            :onclick ""	""
+          )))
+      (button
+        :class "button-off"
+        :onclick ""	""
+      )
+    )
+  )
+)
 ;; Top Widgets ;;
 (defwidget top []
   (box
     :orientation "v"
     :space-evenly "false"
     :valign "start"
-    "launcher"
-    "workspaces"
+    "l"
+    "w"
   )
 )
 
