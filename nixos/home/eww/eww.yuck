@@ -4,10 +4,10 @@
 (defwidget bat []
   (box
     :orientation "v"
-    :space-evenly "false"
+    :space-evenly false
     (label
       :class "bat"
-      :halign "end"
+      :halign "center"
       :text battery
       :tooltip "Battery: ${battery-cappacity}%"
     )
@@ -51,8 +51,8 @@
     :onhoverlost "eww update power=false"
     (box
       :orientation "v"
-      :space-evenly "false"
-      :vexpand "false"
+      :space-evenly false
+      :vexpand false
       :class "powermenu"
       (revealer
         :transition "slideup"
@@ -62,21 +62,19 @@
           :orientation "v"
           :space-evenly "false"
           (button
-            :class "button-bspres"
-            :onclick "bspc wm -r" ""
-          )
-          (button
             :class "button-reboot"
-            :onclick ""	""
+            :onclick ""	""
           )
           (button
             :class "button-quit"
-            :onclick "" ""
+            :onclick "" "󰍃"
           )
           (button
             :class "button-lock"
-            :onclick ""	""
-          )))
+            :onclick ""	""
+          )
+        )
+      )
       (button
         :class "button-off"
         :onclick ""	""
