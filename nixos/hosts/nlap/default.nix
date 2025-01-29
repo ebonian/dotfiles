@@ -53,6 +53,9 @@ in {
   services.supergfxd.enable = true;
   systemd.services.supergfxd.path = [pkgs.pciutils];
 
+  # Battery Optimization
+  powerManagement.powertop.enable = true;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
   services.upower.enable = true;
