@@ -14,6 +14,7 @@
     ./home/ghostty.nix
     ./home/hyprland.nix
     ./home/kitty.nix
+    ./home/wofi.nix
     ./home/zsh.nix
   ];
 
