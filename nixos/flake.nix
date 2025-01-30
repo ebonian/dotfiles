@@ -13,6 +13,12 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
+
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
+      inputs.nixpkgs-unstable.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = {

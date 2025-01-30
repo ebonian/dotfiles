@@ -11,6 +11,7 @@
     ./home/dunst.nix
     ./home/eww.nix
     ./home/firefox.nix
+    ./home/ghostty.nix
     ./home/hyprland.nix
     ./home/kitty.nix
     ./home/zsh.nix
