@@ -3,11 +3,12 @@
   pkgs,
   ...
 }: {
+  home.file.".config/ghostty" = {
+    source = ./ghostty;
+    recursive = true;
+  };
+
   home.packages = [
     inputs.ghostty.packages.${pkgs.system}.default
   ];
-
-  xdg.configFile."ghostty/config".text = ''
-    ${builtins.readFile ./ghostty/config}
-  '';
 }

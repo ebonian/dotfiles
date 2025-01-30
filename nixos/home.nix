@@ -42,7 +42,6 @@
     # programs
     unstable.neovim
     vscodium-fhs
-    wofi
 
     # utilities
     brightnessctl
