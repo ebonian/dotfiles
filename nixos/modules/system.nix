@@ -77,6 +77,6 @@
   services.xserver.xkb = {
     layout = "us,th";
     variant = ",";
-    options = "grp:caps_toggle";
+    options = "grp:alt_shift_toggle";
   };
 }
