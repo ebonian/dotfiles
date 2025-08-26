@@ -1,0 +1,107 @@
+* {
+  font-family: "CaskaydiaCove Nerd Font";
+  font-weight: 700;
+  min-height: 0;
+  font-size: 97%;
+  background: rgba(0, 0, 0, 100);
+  border: none;
+  padding: 1.5px;
+}
+
+window#waybar {
+  background: rgba(0, 0, 0, 0);
+}
+
+window#waybar.hidden {
+  opacity: 0.7;
+}
+
+tooltip {
+  color: #ffffff;
+  background: #1e1e2e;
+  border-radius: 10px;
+  border-style: none;
+}
+
+tooltip label {
+  color: #ffffff;
+}
+
+/*-----module groups----*/
+/* .modules-right {
+  background-color: rgba(232, 236, 241, 0.8);
+}
+
+.modules-center {
+  background-color: rgba(232, 236, 241, 0.8);
+}
+
+.modules-left {
+  background-color: rgba(232, 236, 241, 0.8);
+} */
+
+#workspaces button {
+  color: #707070;
+}
+
+#workspaces button.active {
+  color: #ffffff;
+}
+
+#clock,
+#tray,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#network,
+#pulseaudio,
+#wireplumber,
+#mode,
+#cava,
+#backlight,
+#window,
+#idle_inhibitor,
+#keyboard-state,
+#keyboard-state label,
+#keyboard-state label.locked,
+#mpd,
+#bluetooth,
+#taskbar,
+#taskbar button,
+#custom-light_dark,
+#custom-updater,
+#custom-menu,
+#custom-cycle_wall,
+#custom-power,
+#custom-spotify,
+#custom-weather,
+#custom-power,
+#custom-lock,
+#idle_inhibitor,
+#power-profiles-daemon {
+  color: #cfcfcf;
+  margin: 0px 4px;
+  padding: 0px 8px;
+}
+
+@keyframes blink {
+  to {
+    color: #45475a;
+  }
+}
+
+#taskbar button.active {
+  background-color: #585b70;
+  color: #cdd6f4;
+}
+
+#battery.critical:not(.charging) {
+  color: #f53c3c;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}

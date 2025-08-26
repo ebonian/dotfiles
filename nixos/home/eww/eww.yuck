@@ -1,0 +1,49 @@
+(defwidget corners []
+  (box
+    :class "corners-box"
+    (box
+      :class "corners-left"
+      :hexpand false
+      :halign "start")
+    (box
+      :class "corners-right"
+      :hexpand false
+      :halign "end")))
+
+(defwidget corners-alt []
+  (box
+    :class "corners-box-alt"
+    (box
+      :class "corners-left-alt"
+      :hexpand false
+      :halign "start")
+    (box
+      :class "corners-right-alt"
+      :hexpand false
+      :halign "end")))
+
+(defwindow corners
+  :stacking "bg"
+  :monitor "0"
+  :exclusive false
+  :namespace "corners"
+  :geometry (geometry
+    :x "0px"
+    :y "0px"
+    :width "100%"
+    :height "0%"
+    :anchor "top center")
+  (corners))
+
+(defwindow corners_alt
+  :stacking "bg"
+  :monitor "0"
+  :exclusive false
+  :namespace "corners"
+  :geometry (geometry
+    :x "0px"
+    :y "0px"
+    :width "100%"
+    :height "0%"
+    :anchor "bottom center")
+  (corners-alt))
