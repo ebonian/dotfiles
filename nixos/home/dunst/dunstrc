@@ -1,0 +1,21 @@
+[global]
+font = CaskaydiaCove Nerd Font 10
+origin = top-right
+offset = (10, 10)
+frame_color = "#000000"
+separator_color= frame
+highlight = "#ffffff"
+corner_radius = 10
+
+[urgency_low]
+background = "#000000"
+foreground = "#d6d6d6"
+
+[urgency_normal]
+background = "#000000"
+foreground = "#d6d6d6"
+
+[urgency_critical]
+background = "#000000"
+foreground = "#d6d6d6"
+frame_color = "#fab387"

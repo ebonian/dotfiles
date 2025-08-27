@@ -10,8 +10,9 @@
     ../../home/hyprland.nix
     ../../home/waybar.nix
     ../../home/zsh.nix
-    ../../home/rofi.nix
     ../../home/eww.nix
+    ../../home/fastfetch.nix
+    ../../home/ghostty.nix
   ];
 
   # Enable home manager
@@ -36,8 +37,8 @@
     lua
 
     # programs
-    fastfetch
-    xfce.thunar
+    wofi
+    tofi
     neovim
     vscodium-fhs
     code-cursor
@@ -48,6 +49,10 @@
     bruno
     google-cloud-sdk
     google-cloud-sql-proxy
+    xfce.thunar
+    xfce.ristretto
+    xfce.tumbler
+    xfce.mousepad
 
     # utilities
     brightnessctl

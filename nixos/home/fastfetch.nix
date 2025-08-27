@@ -4,11 +4,11 @@
   ...
 }: {
   home.packages = with pkgs; [
-    rofi
+    fastfetch
   ];
 
-  home.file.".config/rofi" = {
-    source = ./rofi;
+  home.file.".config/fastfetch" = {
+    source = ./fastfetch;
     recursive = true;
   };
 }

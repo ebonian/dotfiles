@@ -4,11 +4,11 @@
   ...
 }: {
   home.packages = with pkgs; [
-    dunst
+    ghostty
   ];
 
-  home.file.".config/dunst" = {
-    source = ./dunst;
+  home.file.".config/ghostty" = {
+    source = ./ghostty;
     recursive = true;
   };
 }

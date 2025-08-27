@@ -1,0 +1,7 @@
+theme = MaterialDarker
+background = 000000
+
+window-padding-x = 5
+window-padding-y = 5
+
+font-family = CaskaydiaCove Nerd Font

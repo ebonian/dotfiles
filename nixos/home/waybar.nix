@@ -1,6 +1,8 @@
-{ inputs, pkgs, ...}:
-
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   programs.waybar.enable = true;
 
   home.file.".config/waybar" = {
