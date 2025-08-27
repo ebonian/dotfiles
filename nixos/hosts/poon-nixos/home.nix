@@ -13,6 +13,7 @@
     ../../home/eww.nix
     ../../home/fastfetch.nix
     ../../home/ghostty.nix
+    ../../home/tmux.nix
   ];
 
   # Enable home manager
@@ -22,7 +23,10 @@
   home.homeDirectory = "/home/poon";
 
   home.packages = with pkgs; let
-    unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
+    unstable = import inputs.nixpkgs-unstable {
+      system = pkgs.system;
+      config.allowUnfree = true;
+    };
   in [
     # languages
     unstable.cargo
@@ -41,7 +45,7 @@
     tofi
     neovim
     vscodium-fhs
-    code-cursor
+    unstable.code-cursor
     discord
     spotify
     bitwarden-desktop
@@ -49,6 +53,7 @@
     bruno
     google-cloud-sdk
     google-cloud-sql-proxy
+    obs-studio
     xfce.thunar
     xfce.ristretto
     xfce.tumbler
@@ -66,6 +71,9 @@
     jq
     ripgrep
     arandr
+    btop
+    postgresql
+    meow
   ];
 
   # Git configurations
