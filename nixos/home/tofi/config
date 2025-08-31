@@ -8,3 +8,5 @@ result-spacing = 25
 num-results = 5
 font = monospace
 background-color = #000A
+text-color = #7A7A7A
+selection-color = #FFFFFF

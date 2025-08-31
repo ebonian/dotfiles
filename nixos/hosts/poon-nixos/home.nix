@@ -14,6 +14,7 @@
     ../../home/fastfetch.nix
     ../../home/ghostty.nix
     ../../home/tmux.nix
+    ../../home/tofi.nix
   ];
 
   # Enable home manager

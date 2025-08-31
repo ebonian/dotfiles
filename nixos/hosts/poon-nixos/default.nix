@@ -54,6 +54,9 @@ in {
     alejandra
     kitty
     gcc
+    file
+    killall
+    direnv
 
     where-is-my-sddm-theme
   ];
