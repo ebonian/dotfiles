@@ -23,7 +23,7 @@
       :halign "end")))
 
 (defwindow corners
-  :stacking "bg"
+  :stacking "overlay"
   :monitor "0"
   :exclusive false
   :namespace "corners"
@@ -36,7 +36,7 @@
   (corners))
 
 (defwindow corners_alt
-  :stacking "bg"
+  :stacking "overlay"
   :monitor "0"
   :exclusive false
   :namespace "corners"

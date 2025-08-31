@@ -70,7 +70,7 @@
   # Enable SDDM
   services.displayManager.sddm = {
     enable = true;
-    theme = "catppuccin-mocha";
+    theme = "where_is_my_sddm_theme";
     package = pkgs.kdePackages.sddm;
   };
 
@@ -112,6 +112,8 @@
 
       START_CHARGE_THRESH_BAT0=0;
       STOP_CHARGE_THRESH_BAT0=80;
+      START_CHARGE_THRESH_BAT1=0;
+      STOP_CHARGE_THRESH_BAT1=80;
     };
   };
 

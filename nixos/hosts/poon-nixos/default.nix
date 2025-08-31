@@ -54,6 +54,8 @@ in {
     alejandra
     kitty
     gcc
+
+    where-is-my-sddm-theme
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

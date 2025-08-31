@@ -42,7 +42,6 @@
 
     # programs
     wofi
-    tofi
     neovim
     vscodium-fhs
     unstable.code-cursor
@@ -58,6 +57,8 @@
     xfce.ristretto
     xfce.tumbler
     xfce.mousepad
+    galculator
+    vlc
 
     # utilities
     brightnessctl
@@ -74,6 +75,7 @@
     btop
     postgresql
     meow
+    bat
   ];
 
   # Git configurations
