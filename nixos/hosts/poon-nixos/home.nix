@@ -60,6 +60,8 @@
     xfce.mousepad
     galculator
     vlc
+    devtoolbox
+    libreoffice-qt6-fresh
 
     # utilities
     brightnessctl
@@ -77,6 +79,8 @@
     postgresql
     meow
     bat
+    cloudflared
+    ttyper
   ];
 
   # Git configurations

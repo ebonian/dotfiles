@@ -35,5 +35,6 @@
 
   home.packages = with pkgs; [
     hyprpaper
+    hyprsunset
   ];
 }
