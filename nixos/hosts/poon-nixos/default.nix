@@ -33,11 +33,21 @@ in {
     "${g14_patches}/sys-kernel_arch-sources-g14_files-0048-asus-nb-wmi-fix-tablet_mode_sw_int.patch"
     "${g14_patches}/v2-0002-hid-asus-change-the-report_id-used-for-HID-LED-co.patch"
   ];
-  #
+
   # Networking
   networking.hostName = "poon-nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
   networking.wireless.iwd.enable = true;
+  networking.nameservers = [ "1.1.1.1" ];
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 8081 19001 19001 ];
+    allowedUDPPorts = [ 8081 19000 19001 ];
+    extraCommands = ''
+      iptables -I INPUT 1 -s 172.16.0.0/12 -p tcp -d 172.17.0.1 -j ACCEPT
+      iptables -I INPUT 2 -s 172.16.0.0/12 -p udp -d 172.17.0.1 -j ACCEPT
+    '';
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -56,7 +66,6 @@ in {
     gcc
     file
     killall
-    direnv
 
     where-is-my-sddm-theme
   ];
@@ -74,6 +83,9 @@ in {
   programs.hyprland = {
     enable = true;
   };
+  # enable appimage support
+  programs.appimage.enable = true;
+  programs.appimage.binfmt = true;
 
   # List services that you want to enable:
 

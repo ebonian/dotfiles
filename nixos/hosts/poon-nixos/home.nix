@@ -28,6 +28,10 @@
       system = pkgs.system;
       config.allowUnfree = true;
     };
+    cursor = import inputs.nixpkgs-cursor {
+      system = pkgs.system;
+      config.allowUnfree = true;
+    };
   in [
     # languages
     unstable.cargo
@@ -45,7 +49,7 @@
     wofi
     neovim
     vscodium-fhs
-    unstable.code-cursor
+    cursor.code-cursor.fhs
     discord
     spotify
     bitwarden-desktop
@@ -62,6 +66,10 @@
     vlc
     devtoolbox
     libreoffice-qt6-fresh
+    postman
+    mongodb-compass
+    helvum
+    realvnc-vnc-viewer
 
     # utilities
     brightnessctl
@@ -81,6 +89,8 @@
     bat
     cloudflared
     ttyper
+    ffmpeg
+    nmap
   ];
 
   # Git configurations

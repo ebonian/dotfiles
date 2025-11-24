@@ -24,6 +24,15 @@
 
   fonts = {
     packages = with pkgs; [
+      # Standard Xorg fonts for VNC Viewer
+      xorg.fontadobe100dpi
+      xorg.fontadobe75dpi
+      xorg.fontbh100dpi
+      xorg.fontbh75dpi
+      xorg.fontmiscmisc
+
+      dejavu_fonts
+
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-emoji
@@ -51,7 +60,7 @@
   users.users.poon = {
     isNormalUser = true;
     description = "Poon";
-    extraGroups = ["networkmanager" "wheel" "docker" "plugdev"];
+    extraGroups = ["networkmanager" "wheel" "docker" "plugdev" "dialout"];
     initialPassword = "password";
   };
   users.extraUsers.poon.extraGroups = ["audio"];
@@ -148,5 +157,10 @@
     enable = true;
     platformTheme = "gnome";
     style = "adwaita-dark";
+  };
+
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
   };
 }
