@@ -28,6 +28,12 @@
       plugins = ["git"];
       theme = "robbyrussell";
     };
+
+    initExtra = ''
+      antigravity() {
+        nohup antigravity "$@" > /dev/null 2>&1 &!
+      }
+    '';
   };
 
   programs.direnv = {

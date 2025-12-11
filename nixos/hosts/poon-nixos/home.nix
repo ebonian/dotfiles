@@ -32,6 +32,10 @@
       system = pkgs.system;
       config.allowUnfree = true;
     };
+    brave = import inputs.nixpkgs-brave {
+      system = pkgs.system;
+      config.allowUnfree = true;
+    };
   in [
     # languages
     unstable.cargo
@@ -44,13 +48,15 @@
         requests
       ]))
     lua
+    nodejs_22
 
     # programs
     wofi
     neovim
     vscodium-fhs
     cursor.code-cursor.fhs
-    discord
+    inputs.antigravity-nix.packages.${pkgs.system}.default
+    unstable.discord
     spotify
     bitwarden-desktop
     dbeaver-bin
@@ -70,6 +76,8 @@
     mongodb-compass
     helvum
     realvnc-vnc-viewer
+    firebase-tools
+    unstable.zed-editor-fhs
 
     # utilities
     brightnessctl
@@ -91,6 +99,7 @@
     ttyper
     ffmpeg
     nmap
+    v4l-utils
   ];
 
   # Git configurations
@@ -114,9 +123,14 @@
 
   programs.chromium = {
     enable = true;
-    package = pkgs.brave;
+    package =
+      (import inputs.nixpkgs-brave {
+        system = pkgs.system;
+        config.allowUnfree = true;
+      }).brave;
     extensions = [
       {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # ublock origin
+      {id = "nngceckbapebfimnlniiiahkandclblb";} # bitwarden
     ];
     commandLineArgs = [
       "--disable-features=WebRtcAllowInputVolumeAdjustment"
@@ -129,6 +143,8 @@
   };
   home.sessionVariables = {
     EDITOR = "nvim";
+    # Ensure tofi and other launchers can find desktop entries from home-manager
+    XDG_DATA_DIRS = "$HOME/.nix-profile/share:$XDG_DATA_DIRS";
   };
 
   home.stateVersion = "25.05";
