@@ -68,9 +68,15 @@
     google-cloud-sql-proxy
     obs-studio
     xfce.thunar
+    xfce.thunar-archive-plugin # Right-click archive/extract in Thunar
     xfce.ristretto
     xfce.tumbler
     xfce.mousepad
+    xarchiver # Archive manager GUI
+    zip
+    unzip
+    p7zip # 7z support
+    unrar # RAR support
     galculator
     vlc
     devtoolbox
@@ -94,7 +100,8 @@
     yq
     jq
     ripgrep
-    arandr
+    wlr-randr # Wayland replacement for xrandr
+    nwg-displays # GUI for Wayland display management (like arandr)
     btop
     postgresql
     meow
@@ -133,7 +140,6 @@
         config.allowUnfree = true;
       }).brave;
     extensions = [
-      {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # ublock origin
       {id = "nngceckbapebfimnlniiiahkandclblb";} # bitwarden
     ];
     commandLineArgs = [

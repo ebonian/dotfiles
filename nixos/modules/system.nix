@@ -65,6 +65,19 @@
   };
   users.extraUsers.poon.extraGroups = ["audio"];
 
+  # Allow passwordless battery charge limit toggle
+  security.sudo.extraRules = [
+    {
+      users = ["poon"];
+      commands = [
+        {
+          command = "${pkgs.polkit}/bin/pkexec";
+          options = ["NOPASSWD"];
+        }
+      ];
+    }
+  ];
+
   # SDDM Theme
   environment.systemPackages = [
     (
@@ -134,6 +147,9 @@
   services.supergfxd.enable = true;
   systemd.services.supergfxd.path = [pkgs.pciutils];
 
+  # Ensure asusd starts on boot (fix missing WantedBy)
+  systemd.services.asusd.wantedBy = ["multi-user.target"];
+
   # Battery Optimization
   powerManagement.powertop.enable = true;
 
@@ -162,33 +178,5 @@
   services.avahi = {
     enable = true;
     nssmdns4 = true;
-  };
-
-  # Memory Management: Prevent system freezes under high memory pressure
-  # ZRAM: Compressed RAM block for better memory efficiency
-  zramSwap = {
-    enable = true;
-    memoryPercent = 50; # Use 50% of RAM for compressed swap
-  };
-
-  # Physical Swap File: 16GB for heavy compilation/memory-intensive tasks
-  swapDevices = [
-    {
-      device = "/var/lib/swapfile";
-      size = 16 * 1024; # 16GB in MB
-    }
-  ];
-
-  # EarlyOOM: Kill processes before system freezes
-  services.earlyoom = {
-    enable = true;
-    freeMemThreshold = 5; # Kill processes when free memory < 5%
-    freeSwapThreshold = 5; # Kill processes when free swap < 5%
-    # Avoid killing critical system processes
-    extraArgs = [
-      "-g"
-      "--avoid"
-      "^(Hyprland|sddm|systemd.*|dbus.*|pipewire.*|wireplumber)$"
-    ];
   };
 }
