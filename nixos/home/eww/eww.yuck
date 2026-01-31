@@ -23,9 +23,12 @@
       :halign "end")))
 
 (defwindow corners
-  :stacking "overlay"
+  :name "eww-corners"
+  :stacking "bg"
   :monitor "0"
   :exclusive false
+  :wm-ignore true
+  :focusable false
   :namespace "corners"
   :geometry (geometry
     :x "0px"
@@ -36,9 +39,12 @@
   (corners))
 
 (defwindow corners_alt
-  :stacking "overlay"
+  :name "eww-corners-alt"
+  :stacking "bg"
   :monitor "0"
   :exclusive false
+  :wm-ignore true
+  :focusable false
   :namespace "corners"
   :geometry (geometry
     :x "0px"

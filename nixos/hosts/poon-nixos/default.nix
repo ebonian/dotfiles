@@ -38,11 +38,11 @@ in {
   networking.hostName = "poon-nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
   networking.wireless.iwd.enable = true;
-  networking.nameservers = [ "1.1.1.1" ];
+  networking.nameservers = ["1.1.1.1"];
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 8081 19001 19001 ];
-    allowedUDPPorts = [ 8081 19000 19001 ];
+    allowedTCPPorts = [8081 19001 19001];
+    allowedUDPPorts = [8081 19000 19001];
     extraCommands = ''
       iptables -I INPUT 1 -s 172.16.0.0/12 -p tcp -d 172.17.0.1 -j ACCEPT
       iptables -I INPUT 2 -s 172.16.0.0/12 -p udp -d 172.17.0.1 -j ACCEPT
@@ -87,6 +87,8 @@ in {
   programs.appimage.binfmt = true;
 
   # List services that you want to enable:
+  services.tailscale.enable = true;
+  services.tailscale.extraSetFlags = ["--netfilter-mode=nodivert"];
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
