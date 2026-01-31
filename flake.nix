@@ -6,10 +6,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-cursor.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-brave.url = "github:nixos/nixpkgs/nixos-unstable";
-    antigravity-nix = {
-      url = "github:jacopone/antigravity-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs-antigravity.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";

@@ -36,6 +36,10 @@
       system = pkgs.system;
       config.allowUnfree = true;
     };
+    antigravity = import inputs.nixpkgs-antigravity {
+      system = pkgs.system;
+      config.allowUnfree = true;
+    };
   in [
     # languages
     unstable.cargo
@@ -55,7 +59,6 @@
     neovim
     vscodium-fhs
     cursor.code-cursor.fhs
-    inputs.antigravity-nix.packages.${pkgs.system}.default
     unstable.discord
     spotify
     bitwarden-desktop
@@ -78,6 +81,7 @@
     realvnc-vnc-viewer
     firebase-tools
     unstable.zed-editor-fhs
+    antigravity.antigravity-fhs
 
     # utilities
     brightnessctl
@@ -134,6 +138,8 @@
     ];
     commandLineArgs = [
       "--disable-features=WebRtcAllowInputVolumeAdjustment"
+      # Use persistent profile directory to preserve sessions/cookies across updates
+      "--user-data-dir=${config.home.homeDirectory}/.config/BraveSoftware/Brave-Browser"
     ];
   };
 
