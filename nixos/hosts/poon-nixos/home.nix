@@ -88,6 +88,7 @@
     firebase-tools
     unstable.zed-editor-fhs
     antigravity.antigravity-fhs
+    prismlauncher
 
     # utilities
     brightnessctl

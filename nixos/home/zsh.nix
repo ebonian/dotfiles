@@ -12,6 +12,7 @@
       ll = "exa --icons -l";
       la = "exa --icons -la";
       tree = "exa --icons -T";
+      minecraft = "nohup prismlauncher >/dev/null 2>&1 &";
     };
     history = {
       size = 10000;

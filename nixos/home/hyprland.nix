@@ -7,9 +7,18 @@
 }: {
   # programs.kitty.enable = true; # required for the default Hyprland config
 
-  home.file.".config/hypr" = {
-    source = ./hyprland;
-    recursive = true;
+  # Symlink individual config files, but NOT monitors.conf/workspaces.conf
+  # so that nwg-displays can write to them
+  home.file = {
+    ".config/hypr/hyprland.conf".source = ./hyprland/hyprland.conf;
+    ".config/hypr/hyprpaper.conf".source = ./hyprland/hyprpaper.conf;
+    ".config/hypr/configs/appearance.conf".source = ./hyprland/configs/appearance.conf;
+    ".config/hypr/configs/env.conf".source = ./hyprland/configs/env.conf;
+    ".config/hypr/configs/exec.conf".source = ./hyprland/configs/exec.conf;
+    ".config/hypr/configs/input.conf".source = ./hyprland/configs/input.conf;
+    ".config/hypr/configs/keybinds.conf".source = ./hyprland/configs/keybinds.conf;
+    ".config/hypr/scripts".source = ./hyprland/scripts;
+    ".config/hypr/wallpapers".source = ./hyprland/wallpapers;
   };
 
   home.pointerCursor = {
