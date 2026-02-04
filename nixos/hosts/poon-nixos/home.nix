@@ -112,6 +112,7 @@
     ffmpeg
     nmap
     v4l-utils
+    wl-clipboard
   ];
 
   # Git configurations
