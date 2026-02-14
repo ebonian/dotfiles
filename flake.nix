@@ -5,6 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-cursor.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-vscodium.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-claude-code.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-brave.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-antigravity.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -19,6 +21,8 @@
     nixpkgs,
     nixpkgs-unstable,
     nixpkgs-cursor,
+    nixpkgs-vscodium,
+    nixpkgs-claude-code,
     nixpkgs-brave,
     home-manager,
     ...

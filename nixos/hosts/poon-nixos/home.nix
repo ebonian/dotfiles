@@ -32,6 +32,14 @@
       system = pkgs.system;
       config.allowUnfree = true;
     };
+    vscodium = import inputs.nixpkgs-vscodium {
+      system = pkgs.system;
+      config.allowUnfree = true;
+    };
+    claude-code = import inputs.nixpkgs-claude-code {
+      system = pkgs.system;
+      config.allowUnfree = true;
+    };
     brave = import inputs.nixpkgs-brave {
       system = pkgs.system;
       config.allowUnfree = true;
@@ -57,8 +65,9 @@
     # programs
     wofi
     neovim
-    vscodium-fhs
+    vscodium.vscodium-fhs
     cursor.code-cursor.fhs
+    claude-code.claude-code
     unstable.discord
     spotify
     bitwarden-desktop
