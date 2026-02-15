@@ -91,7 +91,7 @@
     devtoolbox
     libreoffice-qt6-fresh
     postman
-    mongodb-compass
+    unstable.mongodb-compass
     helvum
     realvnc-vnc-viewer
     firebase-tools
@@ -100,6 +100,7 @@
     prismlauncher
 
     # utilities
+    overskride
     brightnessctl
     networkmanagerapplet
     libnotify

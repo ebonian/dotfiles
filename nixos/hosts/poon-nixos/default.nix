@@ -18,6 +18,7 @@ in {
     ../../modules/zsh.nix
     ../../modules/zoxide.nix
     ../../modules/performance.nix
+    ../../modules/bluetooth.nix
   ];
 
   # Bootloader.
