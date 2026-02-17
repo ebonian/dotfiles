@@ -36,6 +36,10 @@
       system = pkgs.system;
       config.allowUnfree = true;
     };
+    productivity = import inputs.nixpkgs-productivity {
+      system = pkgs.system;
+      config.allowUnfree = true;
+    };
   in [
     # languages
     unstable.cargo
@@ -50,6 +54,7 @@
     lua
     nodejs_22
 
+
     # programs
     wofi
     neovim
@@ -57,6 +62,8 @@
     ide.code-cursor.fhs
     ide.claude-code
     ide.windsurf
+    ide.antigravity-fhs
+    productivity.appflowy
     unstable.discord
     spotify
     bitwarden-desktop
@@ -85,7 +92,6 @@
     realvnc-vnc-viewer
     firebase-tools
     unstable.zed-editor-fhs
-    ide.antigravity-fhs
     prismlauncher
 
     # utilities

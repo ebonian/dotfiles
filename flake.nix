@@ -6,6 +6,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-ide.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-brave.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-productivity.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
@@ -19,6 +20,7 @@
     nixpkgs-unstable,
     nixpkgs-ide,
     nixpkgs-brave,
+    nixpkgs-productivity,
     home-manager,
     ...
   } @ inputs: {
