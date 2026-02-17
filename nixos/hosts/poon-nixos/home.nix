@@ -28,23 +28,11 @@
       system = pkgs.system;
       config.allowUnfree = true;
     };
-    cursor = import inputs.nixpkgs-cursor {
-      system = pkgs.system;
-      config.allowUnfree = true;
-    };
-    vscodium = import inputs.nixpkgs-vscodium {
-      system = pkgs.system;
-      config.allowUnfree = true;
-    };
-    claude-code = import inputs.nixpkgs-claude-code {
+    ide = import inputs.nixpkgs-ide {
       system = pkgs.system;
       config.allowUnfree = true;
     };
     brave = import inputs.nixpkgs-brave {
-      system = pkgs.system;
-      config.allowUnfree = true;
-    };
-    antigravity = import inputs.nixpkgs-antigravity {
       system = pkgs.system;
       config.allowUnfree = true;
     };
@@ -65,9 +53,10 @@
     # programs
     wofi
     neovim
-    vscodium.vscodium-fhs
-    cursor.code-cursor.fhs
-    claude-code.claude-code
+    ide.vscodium-fhs
+    ide.code-cursor.fhs
+    ide.claude-code
+    ide.windsurf
     unstable.discord
     spotify
     bitwarden-desktop
@@ -96,7 +85,7 @@
     realvnc-vnc-viewer
     firebase-tools
     unstable.zed-editor-fhs
-    antigravity.antigravity-fhs
+    ide.antigravity-fhs
     prismlauncher
 
     # utilities
