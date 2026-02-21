@@ -88,8 +88,14 @@ in {
   programs.appimage.enable = true;
   programs.appimage.binfmt = true;
 
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
+
   # List services that you want to enable:
   services.tailscale.enable = true;
+  services.tailscale.package = nixpkgs-unstable.legacyPackages.${pkgs.system}.tailscale;
   services.tailscale.extraSetFlags = ["--netfilter-mode=nodivert"];
 
   # Enable the OpenSSH daemon.

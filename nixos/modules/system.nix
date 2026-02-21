@@ -132,10 +132,9 @@
       CPU_BOOST_ON_AC = 1;
       CPU_BOOST_ON_BAT = 0;
 
-      START_CHARGE_THRESH_BAT0 = 0;
-      STOP_CHARGE_THRESH_BAT0 = 80;
-      START_CHARGE_THRESH_BAT1 = 0;
-      STOP_CHARGE_THRESH_BAT1 = 80;
+      # Battery charge thresholds managed by asusd (asusctl -c)
+      # TLP's tlp-sleep.service overwrites the threshold on every
+      # resume, conflicting with the user's runtime choice.
     };
   };
 

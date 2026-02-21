@@ -54,20 +54,19 @@
     lua
     nodejs_22
 
-
     # programs
     wofi
     neovim
     ide.vscodium-fhs
     ide.code-cursor.fhs
     ide.claude-code
-    ide.windsurf
     ide.antigravity-fhs
+    ide.pencil
+    ide.dbeaver-bin
     productivity.appflowy
     unstable.discord
     spotify
     bitwarden-desktop
-    dbeaver-bin
     bruno
     google-cloud-sdk
     google-cloud-sql-proxy
@@ -93,7 +92,6 @@
     firebase-tools
     unstable.zed-editor-fhs
     prismlauncher
-
     # utilities
     overskride
     brightnessctl
