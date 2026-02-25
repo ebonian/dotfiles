@@ -57,14 +57,18 @@
     # programs
     wofi
     neovim
+    ide.claude-code
+    ide.claude-code-acp
     ide.vscodium-fhs
     ide.code-cursor.fhs
-    ide.claude-code
     ide.antigravity-fhs
     ide.pencil
     ide.dbeaver-bin
+    ide.zed-editor-fhs
     productivity.appflowy
     unstable.discord
+    unstable.mongodb-compass
+    unstable.trayscale
     spotify
     bitwarden-desktop
     bruno
@@ -86,12 +90,11 @@
     devtoolbox
     libreoffice-qt6-fresh
     postman
-    unstable.mongodb-compass
     helvum
     realvnc-vnc-viewer
     firebase-tools
-    unstable.zed-editor-fhs
     prismlauncher
+
     # utilities
     overskride
     brightnessctl
@@ -117,6 +120,12 @@
     v4l-utils
     wl-clipboard
   ];
+
+  # SSH configurations
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
+  };
 
   # Git configurations
   programs.git = {
@@ -163,6 +172,11 @@
     # Ensure tofi and other launchers can find desktop entries from home-manager
     XDG_DATA_DIRS = "$HOME/.nix-profile/share:$XDG_DATA_DIRS";
   };
+
+  home.file.".gnupg/gpg-agent.conf".text = ''
+    default-cache-ttl-ssh 34560000
+    max-cache-ttl-ssh 34560000
+  '';
 
   home.stateVersion = "25.05";
 }
