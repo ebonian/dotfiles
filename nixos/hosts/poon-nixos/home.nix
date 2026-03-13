@@ -65,10 +65,12 @@
     ide.pencil
     ide.dbeaver-bin
     ide.zed-editor-fhs
+    ide.arduino-ide
     productivity.appflowy
     unstable.discord
     unstable.mongodb-compass
     unstable.trayscale
+    unstable.cutecom
     spotify
     bitwarden-desktop
     bruno

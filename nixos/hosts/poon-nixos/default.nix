@@ -19,6 +19,7 @@ in {
     ../../modules/zoxide.nix
     ../../modules/performance.nix
     ../../modules/bluetooth.nix
+    ../../modules/arduino.nix
   ];
 
   # Bootloader.
