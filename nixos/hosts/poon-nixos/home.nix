@@ -66,14 +66,13 @@
     ide.dbeaver-bin
     ide.zed-editor-fhs
     ide.arduino-ide
-    productivity.appflowy
-    unstable.discord
+    ide.bruno
+    ide.devtoolbox
     unstable.mongodb-compass
     unstable.trayscale
     unstable.cutecom
-    spotify
+    unstable.lazyssh
     bitwarden-desktop
-    bruno
     google-cloud-sdk
     google-cloud-sql-proxy
     obs-studio
@@ -89,9 +88,7 @@
     unrar # RAR support
     galculator
     vlc
-    devtoolbox
     libreoffice-qt6-fresh
-    postman
     helvum
     realvnc-vnc-viewer
     firebase-tools
@@ -121,6 +118,7 @@
     nmap
     v4l-utils
     wl-clipboard
+    dcfldd
   ];
 
   # SSH configurations
