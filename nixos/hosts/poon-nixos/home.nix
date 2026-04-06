@@ -28,7 +28,11 @@
       system = pkgs.system;
       config.allowUnfree = true;
     };
-    ide = import inputs.nixpkgs-ide {
+    dev = import inputs.nixpkgs-dev {
+      system = pkgs.system;
+      config.allowUnfree = true;
+    };
+    claude = import inputs.nixpkgs-claude {
       system = pkgs.system;
       config.allowUnfree = true;
     };
@@ -57,21 +61,23 @@
     # programs
     wofi
     neovim
-    ide.claude-code
-    ide.claude-code-acp
-    ide.vscodium-fhs
-    ide.code-cursor.fhs
-    ide.antigravity-fhs
-    ide.pencil
-    ide.dbeaver-bin
-    ide.zed-editor-fhs
-    ide.arduino-ide
-    ide.bruno
-    ide.devtoolbox
+    claude.claude-code
+    dev.vscodium-fhs
+    dev.code-cursor.fhs
+    dev.antigravity-fhs
+    dev.pencil
+    dev.dbeaver-bin
+    dev.zed-editor-fhs
+    dev.arduino-ide
+    dev.bruno
+    dev.devtoolbox
+    dev.bun
     unstable.mongodb-compass
     unstable.trayscale
     unstable.cutecom
     unstable.lazyssh
+    unstable.legcord
+    productivity.obsidian
     bitwarden-desktop
     google-cloud-sdk
     google-cloud-sql-proxy

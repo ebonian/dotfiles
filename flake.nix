@@ -4,7 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-ide.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-dev.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-claude.url = "github:nixos/nixpkgs/9fbc064e90a066853b73d4838564ac7ad49b6956";
     nixpkgs-brave.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-productivity.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -18,7 +19,8 @@
     self,
     nixpkgs,
     nixpkgs-unstable,
-    nixpkgs-ide,
+    nixpkgs-dev,
+    nixpkgs-claude,
     nixpkgs-brave,
     nixpkgs-productivity,
     home-manager,
