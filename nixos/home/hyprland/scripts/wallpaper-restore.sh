@@ -22,14 +22,11 @@ fi
 # Wait a bit for hyprpaper to be ready
 sleep 0.5
 
-# Preload wallpaper
-hyprctl hyprpaper preload "$SELECTED_WALL" 2>/dev/null || exit 0
-
 # Get all monitor names
 mapfile -t MONITORS < <(hyprctl monitors -j 2>/dev/null | jq -r '.[].name' 2>/dev/null)
 
-# Apply wallpaper to each monitor
+# Apply wallpaper to each monitor (preloading is automatic in hyprpaper 0.8+)
 for MON in "${MONITORS[@]}"; do
-    hyprctl hyprpaper wallpaper "$MON,$SELECTED_WALL" 2>/dev/null
+    hyprctl hyprpaper wallpaper "$MON,$SELECTED_WALL" 2>/dev/null || exit 0
 done
 

@@ -9,6 +9,9 @@
     nixpkgs-brave.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-productivity.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprpaper.url = "github:hyprwm/hyprpaper";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,6 +27,8 @@
     nixpkgs-brave,
     nixpkgs-productivity,
     home-manager,
+    hyprland,
+    hyprpaper,
     ...
   } @ inputs: {
     nixosConfigurations = {
@@ -32,6 +37,8 @@
         specialArgs = {inherit nixpkgs-unstable home-manager;};
         modules = [
           ./nixos/hosts/poon-nixos
+
+          hyprland.nixosModules.default
 
           home-manager.nixosModules.home-manager
           {

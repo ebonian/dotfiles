@@ -39,9 +39,6 @@ if [ -z "$SELECTED_WALL" ]; then
     exit 1
 fi
 
-# Preload wallpaper
-hyprctl hyprpaper preload "$SELECTED_WALL"
-
 # Get all monitor names
 mapfile -t MONITORS < <(hyprctl monitors -j | jq -r '.[].name')
 

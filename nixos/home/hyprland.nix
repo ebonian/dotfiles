@@ -48,8 +48,8 @@
     };
   };
 
-  home.packages = with pkgs; [
-    hyprpaper
-    hyprsunset
+  home.packages = [
+    inputs.hyprpaper.packages.${pkgs.system}.default
+    pkgs.hyprsunset
   ];
 }
