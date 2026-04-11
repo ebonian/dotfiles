@@ -30,3 +30,6 @@ for MON in "${MONITORS[@]}"; do
     hyprctl hyprpaper wallpaper "$MON,$SELECTED_WALL" 2>/dev/null || exit 0
 done
 
+# Clean up any leftover wallpapers in memory
+hyprctl hyprpaper unload unused 2>/dev/null
+

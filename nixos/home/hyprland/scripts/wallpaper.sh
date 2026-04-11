@@ -2,6 +2,7 @@
 
 # Directory containing wallpapers
 WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+WALLPAPER_CACHE="$HOME/.cache/hyprpaper_current_wallpaper"
 
 # Get all image files in the directory (case-insensitive match)
 mapfile -t WALLS < <(find "$WALLPAPER_DIR" -maxdepth 1 \( -type f -o -type l \) \
@@ -16,11 +17,19 @@ fi
 # Extract just the filenames for tofi display
 mapfile -t WALL_NAMES < <(printf '%s\n' "${WALLS[@]}" | xargs -n1 basename)
 
-# Use tofi to select a wallpaper
-SELECTED_NAME=$(printf '%s\n' "${WALL_NAMES[@]}" | tofi)
+# Use tofi to select a wallpaper (with disable option)
+SELECTED_NAME=$(printf '%s\n' "Disable Wallpaper" "${WALL_NAMES[@]}" | tofi)
 
 # Exit if no selection was made
 if [ -z "$SELECTED_NAME" ]; then
+    exit 0
+fi
+
+# Handle disable wallpaper
+if [ "$SELECTED_NAME" = "Disable Wallpaper" ]; then
+    killall hyprpaper 2>/dev/null
+    rm -f "$WALLPAPER_CACHE"
+    notify-send "Wallpaper" "Wallpaper disabled"
     exit 0
 fi
 
@@ -39,6 +48,18 @@ if [ -z "$SELECTED_WALL" ]; then
     exit 1
 fi
 
+# Read previous wallpaper for cleanup
+OLD_WALL=""
+if [ -f "$WALLPAPER_CACHE" ]; then
+    OLD_WALL=$(cat "$WALLPAPER_CACHE")
+fi
+
+# Ensure hyprpaper is running (may have been killed by disable)
+if ! pgrep -x hyprpaper > /dev/null; then
+    hyprpaper &
+    sleep 0.5
+fi
+
 # Get all monitor names
 mapfile -t MONITORS < <(hyprctl monitors -j | jq -r '.[].name')
 
@@ -47,8 +68,12 @@ for MON in "${MONITORS[@]}"; do
     hyprctl hyprpaper wallpaper "$MON,$SELECTED_WALL"
 done
 
+# Unload previous wallpaper to free memory
+if [ -n "$OLD_WALL" ] && [ "$OLD_WALL" != "$SELECTED_WALL" ]; then
+    hyprctl hyprpaper unload "$OLD_WALL"
+fi
+
 # Save selected wallpaper path for persistence
-WALLPAPER_CACHE="$HOME/.cache/hyprpaper_current_wallpaper"
 echo "$SELECTED_WALL" > "$WALLPAPER_CACHE"
 
 notify-send "Wallpaper" "Set to $(basename "$SELECTED_WALL")"
