@@ -72,6 +72,7 @@
     dev.bruno
     dev.devtoolbox
     dev.bun
+    dev.gh
     unstable.mongodb-compass
     unstable.trayscale
     unstable.cutecom

@@ -18,12 +18,7 @@
       size = 10000;
       path = "${config.xdg.dataHome}/zsh/history";
     };
-    zplug = {
-      enable = true;
-      plugins = [
-        {name = "zsh-users/zsh-autosuggestions";}
-      ];
-    };
+    autosuggestion.enable = true;
     oh-my-zsh = {
       enable = true;
       plugins = ["git"];
