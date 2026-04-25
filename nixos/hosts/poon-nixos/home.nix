@@ -164,7 +164,7 @@
       {id = "nngceckbapebfimnlniiiahkandclblb";} # bitwarden
     ];
     commandLineArgs = [
-      "--disable-features=WebRtcAllowInputVolumeAdjustment"
+      "--disable-features=WebRtcAllowInputVolumeAdjustment,EvictionThrottlesDraw"
       # "--ozone-platform=x11"
       # Use persistent profile directory to preserve sessions/cookies across updates
       "--user-data-dir=${config.home.homeDirectory}/.config/BraveSoftware/Brave-Browser"
