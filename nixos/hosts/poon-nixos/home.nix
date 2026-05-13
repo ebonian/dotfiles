@@ -100,6 +100,7 @@
     realvnc-vnc-viewer
     firebase-tools
     prismlauncher
+    unstable.jdk25
 
     # utilities
     overskride
@@ -184,6 +185,39 @@
   home.file.".gnupg/gpg-agent.conf".text = ''
     default-cache-ttl-ssh 34560000
     max-cache-ttl-ssh 34560000
+  '';
+
+  home.file.".local/share/jvm/jdk25".source = "${(import inputs.nixpkgs-unstable {
+    system = pkgs.system;
+    config.allowUnfree = true;
+  }).jdk25}";
+
+  home.activation.prismLauncherJavaDefault = config.lib.dag.entryAfter ["writeBoundary"] ''
+    cfg="$HOME/.local/share/PrismLauncher/prismlauncher.cfg"
+    java_path="$HOME/.local/share/jvm/jdk25/bin/java"
+    if [ -f "$cfg" ] && [ -x "$java_path" ]; then
+      run ${pkgs.gnused}/bin/sed -i \
+        -e "s|^JavaPath=.*|JavaPath=$java_path|" \
+        -e "s|^JavaVersion=.*|JavaVersion=25.0.2|" \
+        -e "s|^JavaVendor=.*|JavaVendor=Oracle Corporation|" \
+        -e "s|^JavaSignature=.*|JavaSignature=|" \
+        -e "s|^AutomaticJavaSwitch=.*|AutomaticJavaSwitch=false|" \
+        "$cfg"
+    fi
+    for inst in "$HOME/.local/share/PrismLauncher/instances"/*/instance.cfg; do
+      [ -f "$inst" ] || continue
+      if ${pkgs.gnugrep}/bin/grep -qE '^JavaVersion=1\.8\.' "$inst" 2>/dev/null; then
+        run ${pkgs.gnused}/bin/sed -i \
+          -e 's|^OverrideJavaLocation=.*|OverrideJavaLocation=false|' \
+          -e '/^JavaPath=/d' \
+          -e '/^JavaVersion=/d' \
+          -e '/^JavaVendor=/d' \
+          -e '/^JavaSignature=/d' \
+          -e '/^JavaArchitecture=/d' \
+          -e '/^JavaRealArchitecture=/d' \
+          "$inst"
+      fi
+    done
   '';
 
   home.stateVersion = "25.05";
