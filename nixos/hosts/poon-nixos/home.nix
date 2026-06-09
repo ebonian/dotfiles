@@ -78,6 +78,7 @@
     unstable.cutecom
     unstable.lazyssh
     unstable.legcord
+    telegram-desktop
     productivity.obsidian
     bitwarden-desktop
     google-cloud-sdk
