@@ -15,6 +15,7 @@
     ../../home/ghostty.nix
     ../../home/tmux.nix
     ../../home/tofi.nix
+    ../../home/vscodium.nix
   ];
 
   # Enable home manager
@@ -62,7 +63,6 @@
     wofi
     neovim
     claude.claude-code
-    dev.vscodium-fhs
     dev.code-cursor.fhs
     dev.antigravity-fhs
     dev.pencil
@@ -117,7 +117,7 @@
     wlr-randr # Wayland replacement for xrandr
     nwg-displays # GUI for Wayland display management (like arandr)
     btop
-    postgresql
+    unstable.postgresql_18
     meow
     bat
     cloudflared

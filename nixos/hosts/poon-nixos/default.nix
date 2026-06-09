@@ -81,6 +81,7 @@ in {
   };
   programs.git = {
     enable = true;
+    lfs.enable = true;
   };
   programs.hyprland = {
     enable = true;
