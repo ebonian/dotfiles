@@ -42,8 +42,16 @@
     "fs.inotify.max_user_instances" = 512;
     "fs.file-max" = 2097152; # Max open files
 
-    # Disable core dumps system-wide (prevent core files in directories)
-    "kernel.core_pattern" = "/dev/null"; # Discard all core dumps
+    # Disable core dumps system-wide WITHOUT abusing /dev/null as the target.
+    # A plain-path core_pattern is resolved in the CRASHING process's mount
+    # namespace and opened with O_CREAT as root: when a process crashes inside a
+    # sandbox (nix build, rootless docker, bubblewrap, ...) where /dev/null isn't
+    # the real device, the kernel creates a root-owned 0600 regular file there,
+    # which leaks back to the host /dev/null -> every later `>/dev/null` gets
+    # EACCES, OS-wide and recurring. The `|` pipe form runs the helper in the
+    # INIT namespace and writes no file, so dumps are discarded with zero chance
+    # of clobbering /dev/null.
+    "kernel.core_pattern" = "|${pkgs.coreutils}/bin/true"; # discard, never touch /dev/null
   };
 
   # NVMe I/O scheduler and USB power management via udev

@@ -1,5 +1,6 @@
 * {
-  font-family: "CaskaydiaCove Nerd Font";
+  /* Mono variant centers every icon in a fixed cell (fixes per-glyph left-bias) */
+  font-family: "CaskaydiaCove Nerd Font Mono";
   font-weight: 700;
   min-height: 0;
   font-size: 97%;
@@ -42,7 +43,9 @@ tooltip label {
 
 #workspaces button {
   color: #d7d7d7;
-  font-size: 135%;
+  font-size: 100%;
+  padding: 2px 0px;
+  min-width: 24px;
 }
 
 #workspaces button.active {
@@ -83,9 +86,35 @@ tooltip label {
 #idle_inhibitor,
 #power-profiles-daemon {
   color: #cfcfcf;
-  margin: 0px 4px;
-  padding: 0px 8px;
+  /* vertical bar: thin strip. min-width equalises every module's width so the
+     glyphs (centered in their Mono cells) sit dead-center; larger font-size makes
+     the icons prominent; small vertical padding/margin keeps items close. */
+  font-size: 134%;
+  margin: 2px 0px;
+  padding: 2px 0px;
+  min-width: 24px;
 }
+
+/* clock shows HH over MM on two lines; smaller than the icons so two digits
+   still fit the thin strip */
+#clock {
+  font-size: 98%;
+  /* keep the larger gap before the clock while the stats above stay tight */
+  margin-top: 10px;
+}
+
+/* per-icon size tuning: Nerd Font glyphs render at different visual sizes at the
+   same font-size, so equalise them individually. Bar width is unaffected — every
+   Mono cell stays under the 24px min-width. */
+#cpu         { font-size: 150%; }
+#memory      { font-size: 150%; }
+#temperature { font-size: 128%; }
+#pulseaudio  { font-size: 166%; }
+#battery     { font-size: 170%; }
+/* the charging bolt / plug glyphs are visually taller than the battery-outline
+   glyphs, so shrink those states to keep the icon size consistent */
+#battery.charging,
+#battery.plugged { font-size: 122%; }
 
 @keyframes blink {
   to {

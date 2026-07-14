@@ -16,6 +16,7 @@
     ../../home/tmux.nix
     ../../home/tofi.nix
     ../../home/vscodium.nix
+    ../../home/zed.nix
   ];
 
   # Enable home manager
@@ -63,11 +64,12 @@
     wofi
     neovim
     claude.claude-code
+    dev.codex
+    dev.opencode
     dev.code-cursor.fhs
     dev.antigravity-fhs
     dev.pencil
     dev.dbeaver-bin
-    dev.zed-editor-fhs
     dev.arduino-ide
     dev.bruno
     dev.devtoolbox
@@ -131,10 +133,37 @@
   ];
 
   # SSH configurations
-  programs.ssh = {
-    enable = true;
-    addKeysToAgent = "yes";
-  };
+  # ~/.ssh/config is written as a mutable regular file by the activation
+  # script below (single owner). Do NOT re-enable programs.ssh: it makes
+  # home-manager fight over the same file and breaks every rebuild with
+  # "Existing file ... would be clobbered by backing up" (AddKeysToAgent
+  # is already set in the file content).
+  home.activation.sshConfig = config.lib.dag.entryAfter ["writeBoundary"] ''
+    run ${pkgs.coreutils}/bin/install -m 0600 -D \
+      ${pkgs.writeText "ssh-config" ''
+        Host poon-wsl poon-pc-wsl
+          HostName poon-pc-wsl
+          User poon
+          LocalForward 4938 localhost:4938
+          LocalForward 3003 localhost:3003
+          LocalForward 8787 localhost:8787
+          ServerAliveInterval 30
+          ServerAliveCountMax 3
+
+        Host *
+          ForwardAgent no
+          AddKeysToAgent yes
+          Compression no
+          ServerAliveInterval 0
+          ServerAliveCountMax 3
+          HashKnownHosts no
+          UserKnownHostsFile ~/.ssh/known_hosts
+          ControlMaster no
+          ControlPath ~/.ssh/master-%r@%n:%p
+          ControlPersist no
+      ''} \
+      "$HOME/.ssh/config"
+  '';
 
   # Git configurations
   programs.git = {

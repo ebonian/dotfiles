@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-dev.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-claude.url = "github:nixos/nixpkgs/e062a191667e1c067213959dad57d1c52b40edef";
+    nixpkgs-claude.url = "github:nixos/nixpkgs/7fb694b30a1edae368bb0a0710c561af8970924b";
     nixpkgs-brave.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-productivity.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -44,7 +44,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = ".backup";
+            home-manager.backupFileExtension = "backup";
 
             home-manager.users.poon = import ./nixos/hosts/poon-nixos/home.nix;
 

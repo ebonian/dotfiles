@@ -3,18 +3,17 @@
   "layer": "top",
   "exclusive": true,
   "passthrough": false,
-  "position": "top",
+  "position": "left",
   "fixed-center": true,
   "ipc": true,
   // Choose the order of the modules
   "modules-left": [
     "hyprland/workspaces"
   ],
+  // Resting view (super+i OFF): volume, battery, clock only. super+i swaps to
+  // config-full.jsonc which adds cpu/memory/temperature and a value under each icon.
   "modules-right": [
     // "power-profiles-daemon",
-    "cpu",
-    "memory",
-    "temperature",
     "pulseaudio",
     "battery",
     "battery#bat2",
@@ -52,35 +51,50 @@
     // }
   },
   "clock": {
+    "align": 0.5,
+    "justify": "center",
     // "timezone": "America/New_York",
-    "format-alt": "{:%Y-%m-%d}",
-    "tooltip": false,
+    "format": "{:%H\n%M}",
+    "format-alt": "{:%d\n%m}",
+    "tooltip": true,
+    "tooltip-format": "{:%A %d %B %Y  %H:%M}",
   },
   "cpu": {
-    "format": "{usage}% ",
-    "tooltip": false,
+    "align": 0.5,
+    "justify": "center",
+    "format": "",
+    "tooltip": true,
   },
   "memory": {
-    "format": "{}% ",
+    "align": 0.5,
+    "justify": "center",
+    "format": "",
+    "tooltip-format": "Memory  {percentage}% ({used:.1f}/{total:.1f} GiB)",
   },
   "temperature": {
+    "align": 0.5,
+    "justify": "center",
     // "thermal-zone": 2,
     // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
     "critical-threshold": 80,
     // "format-critical": "{temperatureC}°C {icon}",
-    "format": "{temperatureC}°C ",
+    "format": "",
+    "tooltip-format": "{temperatureC}°C",
   },
   "battery": {
+    "align": 0.5,
+    "justify": "center",
     "states": {
       // "good": 95,
       "warning": 30,
       "critical": 15,
     },
-    "format": "{capacity}% {icon}",
-    "format-full": "{capacity}% {icon}",
-    "format-charging": "{capacity}% ",
-    "format-plugged": "{capacity}% ",
-    "format-alt": "{time} {icon}",
+    "format": "{icon}\n<span size='8192'>{capacity}%</span>",
+    "tooltip-format": "Battery  {capacity}% · {time}",
+    "format-full": "{icon}\n<span size='8192'>{capacity}%</span>",
+    "format-charging": "\n<span size='8192'>{capacity}%</span>",
+    "format-plugged": "\n<span size='8192'>{capacity}%</span>",
+    "format-alt": "{icon}\n<span size='8192'>{capacity}%</span>",
     // "format-good": "", // An empty format will hide the module
     // "format-full": "",
     "format-icons": [
@@ -115,11 +129,14 @@
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
   },
   "pulseaudio": {
+    "align": 0.5,
+    "justify": "center",
     // "scroll-step": 1, // %, can be a float
-    "format": "{volume}% {icon} {format_source}",
-    "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": "  {format_source}",
+    "format": "{icon}\n<span size='8192'>{volume}%</span>",
+    "tooltip-format": "Volume  {volume}% · {desc}",
+    "format-bluetooth": "{icon}\n<span size='8192'>{volume}%</span>",
+    "format-bluetooth-muted": "",
+    "format-muted": "",
     "format-source": "{volume}% ",
     "format-source-muted": "",
     "format-icons": {
@@ -130,9 +147,9 @@
       "portable": "",
       "car": "",
       "default": [
-        " ",
-        " ",
-        " "
+        "",
+        "",
+        ""
       ],
     },
     "on-click": "pavucontrol",
