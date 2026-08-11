@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+#
+# xclip(1) shim — answers with the clipboard of the SSH *client* machine.
+#
+# Claude Code pastes images by shelling out, on whichever host it runs on, to:
+#     xclip -selection clipboard -t TARGETS   -o
+#     xclip -selection clipboard -t image/png -o
+# Inside an SSH session that host is this one, so Ctrl+V reads a clipboard you
+# never copied into. This shim forwards those reads down the reverse tunnel
+# opened by the client's ~/.ssh/config:
+#     RemoteForward 127.0.0.1:47777 127.0.0.1:47777
+#
+# Install on the remote (run from the laptop):
+#     ssh <host> 'mkdir -p ~/bin && cat > ~/bin/xclip && chmod +x ~/bin/xclip' \
+#       < ~/.local/share/clipboard-bridge/xclip
+# and make sure ~/bin precedes any real xclip in PATH.
+#
+# When the tunnel is down this exits non-zero without output, so Claude Code's
+# `||` chain falls through to the local wl-paste exactly as it does today.
+
+set -u
+
+port=${CLIPBOARD_BRIDGE_PORT:-47777}
+args=("$@")
+
+target=
+selection=clipboard
+reading=0
+
+while [ $# -gt 0 ]; do
+	case "$1" in
+	-o | -out | -output) reading=1 ;;
+	-i | -in) reading=0 ;;
+	-t | -target) target=${2-}; shift ;;
+	-sel | -select | -selection) selection=${2-}; shift ;;
+	esac
+	shift
+done
+
+# Anything we don't serve goes to a real xclip if the host has one; failing that
+# a non-zero exit is the correct answer, not a hang.
+fallback() {
+	local real
+	for real in /usr/bin/xclip /usr/local/bin/xclip /bin/xclip; do
+		[ -x "$real" ] && exec "$real" "${args[@]}"
+	done
+	exit 1
+}
+
+[ "$reading" = 1 ] || fallback
+
+case "$target" in
+TARGETS) req=TARGETS ;;
+image/*) req=$target ;;
+'' | text/plain | text/plain*charset* | UTF8_STRING | STRING)
+	if [ "$selection" = primary ]; then req=primary; else req=text; fi
+	;;
+*) fallback ;;
+esac
+
+tmp=$(mktemp) || exit 1
+trap 'rm -f "$tmp"' EXIT
+
+# Redirect on the group rather than `exec` so a refused connection fails this
+# command instead of killing the shell before fallback can run. 2>/dev/null has
+# to come first: a failing redirection aborts the rest of the list, so applied
+# later it would not be in place to swallow bash's "Connection refused".
+{
+	printf '%s\n' "$req" >&3
+	cat <&3
+} 2>/dev/null 3<>"/dev/tcp/127.0.0.1/$port" >"$tmp" || fallback
+
+[ -s "$tmp" ] || exit 1
+cat "$tmp"

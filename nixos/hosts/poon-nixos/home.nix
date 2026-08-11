@@ -6,6 +6,7 @@
 }: {
   imports = [
     ../../home/firefox.nix
+    ../../home/clipboard-bridge.nix
     ../../home/dunst.nix
     ../../home/hyprland.nix
     ../../home/waybar.nix
@@ -147,6 +148,10 @@
           LocalForward 4938 localhost:4938
           LocalForward 3003 localhost:3003
           LocalForward 8787 localhost:8787
+          # Lets the remote's ~/bin/xclip shim read this machine's clipboard,
+          # so Ctrl+V pastes images into Claude Code running over SSH.
+          # Served by clipboard-bridge.service (../../home/clipboard-bridge.nix).
+          RemoteForward 127.0.0.1:47777 127.0.0.1:47777
           ServerAliveInterval 30
           ServerAliveCountMax 3
 
