@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-dev.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-claude.url = "github:nixos/nixpkgs/7fb694b30a1edae368bb0a0710c561af8970924b";
+    nixpkgs-claude.url = "github:nixos/nixpkgs/2f388e38b124530c4eac5e1766885c8391d84d82";
     nixpkgs-brave.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-productivity.url = "github:nixos/nixpkgs/nixos-unstable";
 
