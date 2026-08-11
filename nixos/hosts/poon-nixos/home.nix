@@ -102,6 +102,8 @@
     libreoffice-qt6-fresh
     helvum
     realvnc-vnc-viewer
+    remmina # RDP/VNC/SPICE remote desktop (FreeRDP-backed)
+    moonlight-qt # Moonlight game/desktop streaming client (NVIDIA GameStream/Sunshine)
     firebase-tools
     prismlauncher
     unstable.jdk25
@@ -168,6 +170,24 @@
           ControlPersist no
       ''} \
       "$HOME/.ssh/config"
+  '';
+
+  # Remmina preferences
+  # Seed remmina.pref ONCE with best-quality image scaling
+  # (GDK_INTERP_HYPER = 3). This makes a "Scaled" RDP session — where the
+  # remote keeps the host's own resolution and Remmina shrinks the picture
+  # to fit our window — stay sharp instead of looking blurry/aliased.
+  # Written only if absent: Remmina owns this file and rewrites it on exit,
+  # so (unlike the SSH config above) we must NOT clobber it every rebuild.
+  home.activation.remminaPref = config.lib.dag.entryAfter ["writeBoundary"] ''
+    if [ ! -e "$HOME/.config/remmina/remmina.pref" ]; then
+      run ${pkgs.coreutils}/bin/install -m 0644 -D \
+        ${pkgs.writeText "remmina.pref" ''
+          [remmina_pref]
+          scale_quality=3
+        ''} \
+        "$HOME/.config/remmina/remmina.pref"
+    fi
   '';
 
   # Git configurations
