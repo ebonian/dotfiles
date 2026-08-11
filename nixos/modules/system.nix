@@ -122,7 +122,14 @@
       CPU_SCALING_MIN_FREQ_ON_AC = 400000;
       CPU_SCALING_MAX_FREQ_ON_AC = 5263000;
       CPU_SCALING_MIN_FREQ_ON_BAT = 400000;
-      CPU_SCALING_MAX_FREQ_ON_BAT = 2400000;
+      CPU_SCALING_MAX_FREQ_ON_BAT = 1800000; # Cap at 1.8GHz on battery to save power
+
+      # Auto-switch ASUS platform profile by power source (caps package TDP).
+      # NOTE: asusd also manages platform_profile; TLP re-asserts these on every
+      # AC<->battery transition, so a manual `asusctl profile -P` holds only until
+      # the next power event. If they ever fight, drop these two lines.
+      PLATFORM_PROFILE_ON_AC = "balanced";
+      PLATFORM_PROFILE_ON_BAT = "quiet";
 
       CPU_MIN_PERF_ON_AC = 0;
       CPU_MAX_PERF_ON_AC = 100;
